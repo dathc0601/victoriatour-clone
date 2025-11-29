@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'book_now' => 'Book Now',
+    'submit' => 'Submit',
+    'send_message' => 'Send Message',
+    'subscribe' => 'Subscribe',
+    'read_more' => 'Read More',
+    'view_all' => 'View All',
+    'view_details' => 'View Details',
+    'explore' => 'Explore',
+    'discover' => 'Discover',
+    'learn_more' => 'Learn More',
+    'contact_us' => 'Contact Us',
+    'inquire_now' => 'Inquire Now',
+    'clear_filters' => 'Clear Filters',
+    'apply_filters' => 'Apply Filters',
+    'load_more' => 'Load More',
+    'back_to_top' => 'Back to Top',
+    'copy_link' => 'Copy Link',
+    'share' => 'Share',
+    'days' => 'days',
+    'day' => 'Day',
+    'accept' => 'Accept',
+    'decline' => 'Decline',
+];

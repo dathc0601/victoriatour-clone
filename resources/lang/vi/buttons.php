@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'book_now' => 'Đặt ngay',
+    'submit' => 'Gửi',
+    'send_message' => 'Gửi tin nhắn',
+    'subscribe' => 'Đăng ký',
+    'read_more' => 'Xem thêm',
+    'view_all' => 'Xem tất cả',
+    'view_details' => 'Xem chi tiết',
+    'explore' => 'Khám phá',
+    'discover' => 'Khám phá',
+    'learn_more' => 'Tìm hiểu thêm',
+    'contact_us' => 'Liên hệ chúng tôi',
+    'inquire_now' => 'Liên hệ ngay',
+    'clear_filters' => 'Xóa bộ lọc',
+    'apply_filters' => 'Áp dụng',
+    'load_more' => 'Xem thêm',
+    'back_to_top' => 'Lên đầu trang',
+    'copy_link' => 'Sao chép liên kết',
+    'share' => 'Chia sẻ',
+    'days' => 'ngày',
+    'day' => 'Ngày',
+    'accept' => 'Chấp nhận',
+    'decline' => 'Từ chối',
+];
