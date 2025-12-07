@@ -124,17 +124,20 @@ class Settings extends Page implements HasForms
                         Forms\Components\FileUpload::make('header_logo')
                             ->label('Header Logo')
                             ->image()
+                            ->disk(config('filesystems.default'))
                             ->directory('settings/logos')
                             ->visibility('public')
                             ->helperText('Recommended: PNG with transparency, max height 60px'),
                         Forms\Components\FileUpload::make('footer_logo')
                             ->label('Footer Logo')
                             ->image()
+                            ->disk(config('filesystems.default'))
                             ->directory('settings/logos')
                             ->visibility('public')
                             ->helperText('White/light version for dark footer background'),
                         Forms\Components\FileUpload::make('favicon')
                             ->label('Favicon')
+                            ->disk(config('filesystems.default'))
                             ->directory('settings/favicons')
                             ->visibility('public')
                             ->acceptedFileTypes(['image/x-icon', 'image/png', 'image/svg+xml'])
@@ -142,6 +145,7 @@ class Settings extends Page implements HasForms
                         Forms\Components\FileUpload::make('og_image')
                             ->label('Default OG Image')
                             ->image()
+                            ->disk(config('filesystems.default'))
                             ->directory('settings/og-images')
                             ->visibility('public')
                             ->helperText('Recommended: 1200x630 pixels. Used when pages have no custom image.'),

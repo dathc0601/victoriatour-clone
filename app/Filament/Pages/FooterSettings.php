@@ -68,6 +68,7 @@ class FooterSettings extends Page implements HasForms
                                         Forms\Components\FileUpload::make('footer_logo')
                                             ->label('Footer Logo')
                                             ->image()
+                                            ->disk(config('filesystems.default'))
                                             ->directory('settings/logos')
                                             ->visibility('public')
                                             ->helperText('White/light version for dark footer background. Recommended: PNG with transparency.'),

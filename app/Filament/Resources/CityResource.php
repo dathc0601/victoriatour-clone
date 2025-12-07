@@ -49,6 +49,7 @@ class CityResource extends Resource
                     ->schema([
                         Forms\Components\FileUpload::make('image')
                             ->image()
+                            ->disk(config('filesystems.default'))
                             ->directory('cities')
                             ->visibility('public'),
                     ]),

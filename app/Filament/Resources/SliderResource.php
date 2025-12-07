@@ -44,6 +44,7 @@ class SliderResource extends Resource
                     ->schema([
                         Forms\Components\FileUpload::make('image')
                             ->image()
+                            ->disk(config('filesystems.default'))
                             ->directory('sliders')
                             ->visibility('public')
                             ->required(),

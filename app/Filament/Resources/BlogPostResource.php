@@ -57,6 +57,7 @@ class BlogPostResource extends Resource
                     ->schema([
                         Forms\Components\FileUpload::make('image')
                             ->image()
+                            ->disk(config('filesystems.default'))
                             ->directory('blog')
                             ->visibility('public'),
                     ]),
