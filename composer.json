@@ -12,6 +12,7 @@
         "filament/spatie-laravel-translatable-plugin": "^3.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^3.7",
         "mews/purifier": "^3.4",
         "solution-forest/filament-tree": "^2.1",
