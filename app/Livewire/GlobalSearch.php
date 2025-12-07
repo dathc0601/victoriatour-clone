@@ -15,6 +15,12 @@ class GlobalSearch extends Component
 
     public bool $showDropdown = false;
     public array $results = [];
+    public bool $modalMode = false;
+
+    public function mount(bool $modalMode = false): void
+    {
+        $this->modalMode = $modalMode;
+    }
 
     public function updatedQuery(): void
     {

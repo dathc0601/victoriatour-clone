@@ -13,8 +13,8 @@ class TourFilter extends Component
 {
     use WithPagination;
 
-    #[Url(as: 'destination')]
-    public string $destination = '';
+    // Destination is now passed from controller, not URL-bound
+    public ?string $destination = null;
 
     #[Url(as: 'category')]
     public string $category = '';
@@ -28,9 +28,9 @@ class TourFilter extends Component
     #[Url(as: 'sort')]
     public string $sortBy = 'default';
 
-    public function updatingDestination(): void
+    public function mount(?string $destination = null): void
     {
-        $this->resetPage();
+        $this->destination = $destination;
     }
 
     public function updatingCategory(): void
@@ -53,9 +53,15 @@ class TourFilter extends Component
         $this->resetPage();
     }
 
+    public function applyFilters(): void
+    {
+        $this->resetPage();
+    }
+
     public function clearFilters(): void
     {
-        $this->reset(['destination', 'category', 'duration', 'priceRange', 'sortBy']);
+        // Don't reset destination - it's route-based now
+        $this->reset(['category', 'duration', 'priceRange', 'sortBy']);
         $this->resetPage();
     }
 
@@ -115,7 +121,8 @@ class TourFilter extends Component
         $destinations = Destination::active()->ordered()->get();
         $categories = TourCategory::active()->get();
 
-        $hasFilters = $this->destination || $this->category || $this->duration || $this->priceRange || $this->sortBy !== 'default';
+        // Destination is now route-based, don't include in hasFilters
+        $hasFilters = $this->category || $this->duration || $this->priceRange || $this->sortBy !== 'default';
 
         return view('livewire.tour-filter', [
             'tours' => $tours,

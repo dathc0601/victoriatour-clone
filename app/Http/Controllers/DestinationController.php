@@ -22,17 +22,26 @@ class DestinationController extends Controller
     {
         $destination = Destination::where('slug', $slug)
             ->active()
-            ->with(['cities' => function ($q) {
-                $q->where('is_active', true);
-            }])
+            ->with([
+                'cities' => fn($q) => $q->where('is_active', true)->withCount(['tours' => fn($tq) => $tq->active()]),
+                'visa',
+                'policy',
+            ])
             ->firstOrFail();
 
         $tours = $destination->tours()
             ->active()
             ->ordered()
             ->with('categories')
-            ->paginate(12);
+            ->take(12)
+            ->get();
 
-        return view('destinations.show', compact('destination', 'tours'));
+        $hotels = $destination->hotels()
+            ->active()
+            ->ordered()
+            ->take(8)
+            ->get();
+
+        return view('destinations.show', compact('destination', 'tours', 'hotels'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -59,6 +60,26 @@ class Destination extends Model implements HasMedia
     public function tours(): HasMany
     {
         return $this->hasMany(Tour::class);
+    }
+
+    public function hotels(): HasMany
+    {
+        return $this->hasMany(Hotel::class);
+    }
+
+    public function visa(): HasOne
+    {
+        return $this->hasOne(DestinationVisa::class);
+    }
+
+    public function policy(): HasOne
+    {
+        return $this->hasOne(DestinationPolicy::class);
+    }
+
+    public function miceContents(): HasMany
+    {
+        return $this->hasMany(MiceContent::class);
     }
 
     public function scopeActive($query)

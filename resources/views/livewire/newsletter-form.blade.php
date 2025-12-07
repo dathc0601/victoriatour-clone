@@ -1,32 +1,36 @@
 <div>
     @if($success)
-        <div class="bg-accent-500/20 border border-accent-500 text-accent-400 px-4 py-3 rounded-lg">
-            Thanks for subscribing! You'll receive our latest updates soon.
+        <div class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-4 py-3 rounded text-sm">
+            {{ __('messages.home.newsletter_success') }}
         </div>
     @else
-        <form wire:submit="subscribe" class="flex flex-col sm:flex-row gap-3">
-            <div class="flex-1">
-                <input
-                    type="email"
-                    wire:model="email"
-                    placeholder="Enter your email"
-                    class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-accent-400 transition"
-                >
-                @error('email')
-                    <p class="mt-1 text-red-400 text-sm">{{ $message }}</p>
-                @enderror
-                @if($error)
-                    <p class="mt-1 text-yellow-400 text-sm">{{ $error }}</p>
-                @endif
-            </div>
+        <form wire:submit="subscribe" class="relative">
+            <input
+                type="email"
+                wire:model="email"
+                placeholder="{{ __('messages.footer.enter_email') }}"
+                class="w-full pl-4 pr-12 py-3 bg-transparent border border-white/30 text-white text-sm placeholder-gray-400 focus:outline-none focus:border-white/50 transition-colors"
+            >
             <button
                 type="submit"
                 wire:loading.attr="disabled"
-                class="px-6 py-3 bg-accent-500 text-white font-medium rounded-lg hover:bg-accent-600 transition disabled:opacity-50 whitespace-nowrap"
+                class="absolute right-0 top-0 h-full px-4 text-white/60 hover:text-white transition-colors disabled:opacity-50"
+                aria-label="{{ __('buttons.subscribe') }}"
             >
-                <span wire:loading.remove>Subscribe</span>
-                <span wire:loading>Subscribing...</span>
+                <svg wire:loading.remove class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+                </svg>
+                <svg wire:loading class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
             </button>
         </form>
+        @error('email')
+            <p class="mt-2 text-red-400 text-xs">{{ $message }}</p>
+        @enderror
+        @if($error)
+            <p class="mt-2 text-amber-400 text-xs">{{ $error }}</p>
+        @endif
     @endif
 </div>

@@ -10,21 +10,63 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = BlogPost::active()
+        $categorySlug = $request->get('category');
+        $perPage = 10;
+
+        // Get featured posts (first 4) - only when showing all posts
+        $featuredPosts = collect();
+        if (!$categorySlug) {
+            $featuredPosts = BlogPost::active()
+                ->featured()
+                ->with('category')
+                ->latest('published_at')
+                ->take(5)
+                ->get();
+        }
+
+        // Get latest posts
+        $postsQuery = BlogPost::active()
             ->with('category')
             ->latest('published_at');
 
         // Filter by category
-        if ($request->filled('category')) {
-            $posts->whereHas('category', function ($q) use ($request) {
-                $q->where('slug', $request->category);
-            });
+        if ($categorySlug) {
+            $postsQuery->whereHas('category', fn($q) => $q->where('slug', $categorySlug));
         }
 
-        $posts = $posts->paginate(9);
-        $categories = BlogCategory::active()->withCount('posts')->get();
+        // Exclude featured posts from latest news when showing all
+        if (!$categorySlug && $featuredPosts->isNotEmpty()) {
+            $postsQuery->whereNotIn('id', $featuredPosts->pluck('id'));
+        }
 
-        return view('blog.index', compact('posts', 'categories'));
+        $posts = $postsQuery->paginate($perPage);
+
+        // Handle AJAX request for infinite scroll
+        if ($request->ajax()) {
+            $html = '';
+            foreach ($posts as $index => $post) {
+                // Calculate size based on position in current page
+                $globalIndex = ($posts->currentPage() - 1) * $perPage + $index;
+                $size = match($globalIndex % 11) {
+                    0 => 'large',
+                    3 => 'wide',
+                    6 => 'tall',
+                    default => 'standard',
+                };
+                $html .= view('components.blog-bento-card', ['post' => $post, 'size' => $size])->render();
+            }
+
+            return response()->json([
+                'html' => $html,
+                'hasMore' => $posts->hasMorePages(),
+                'nextPage' => $posts->currentPage() + 1,
+            ]);
+        }
+
+        $categories = BlogCategory::active()->withCount('posts')->get();
+        $activeCategory = $categorySlug;
+
+        return view('blog.index', compact('featuredPosts', 'posts', 'categories', 'activeCategory'));
     }
 
     public function show(string $slug)
@@ -43,6 +85,10 @@ class BlogController extends Controller
             ->take(3)
             ->get();
 
-        return view('blog.show', compact('post', 'relatedPosts'));
+        // Calculate reading time (average 200 words per minute)
+        $wordCount = str_word_count(strip_tags($post->content ?? ''));
+        $readingTime = max(1, (int) ceil($wordCount / 200));
+
+        return view('blog.show', compact('post', 'relatedPosts', 'readingTime'));
     }
 }

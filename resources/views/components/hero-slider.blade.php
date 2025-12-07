@@ -1,6 +1,6 @@
 @props(['sliders'])
 
-<section class="relative h-[70vh] min-h-[500px] max-h-[700px]">
+<section class="relative h-screen" data-hero>
     <div class="swiper hero-slider h-full" id="heroSlider">
         <div class="swiper-wrapper">
             @forelse($sliders as $slider)

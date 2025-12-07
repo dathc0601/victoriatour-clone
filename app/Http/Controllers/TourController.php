@@ -11,41 +11,44 @@ class TourController extends Controller
 {
     public function index(Request $request)
     {
-        $tours = Tour::active()
-            ->ordered()
-            ->with(['destination', 'categories']);
-
-        // Filter by destination
-        if ($request->filled('destination')) {
-            $tours->whereHas('destination', function ($q) use ($request) {
-                $q->where('slug', $request->destination);
-            });
+        // Redirect old query param URLs to new route structure
+        if ($request->has('destination')) {
+            return redirect()->route('tours.destination', $request->destination);
         }
-
-        // Filter by category
-        if ($request->filled('category')) {
-            $tours->whereHas('categories', function ($q) use ($request) {
-                $q->where('slug', $request->category);
-            });
-        }
-
-        // Filter by duration
-        if ($request->filled('duration')) {
-            match ($request->duration) {
-                '1-3' => $tours->whereBetween('duration_days', [1, 3]),
-                '4-7' => $tours->whereBetween('duration_days', [4, 7]),
-                '8-14' => $tours->whereBetween('duration_days', [8, 14]),
-                '15+' => $tours->where('duration_days', '>=', 15),
-                default => null,
-            };
-        }
-
-        $tours = $tours->paginate(12);
 
         $destinations = Destination::active()->ordered()->get();
         $categories = TourCategory::active()->get();
 
-        return view('tours.index', compact('tours', 'destinations', 'categories'));
+        // Get featured tours for bento grid (only on main page)
+        $featuredTours = Tour::active()
+            ->featured()
+            ->with(['destination', 'categories'])
+            ->take(4)
+            ->get();
+
+        return view('tours.index', [
+            'destinations' => $destinations,
+            'categories' => $categories,
+            'featuredTours' => $featuredTours,
+            'activeDestination' => null,
+        ]);
+    }
+
+    public function byDestination(string $destination)
+    {
+        $activeDestination = Destination::where('slug', $destination)
+            ->active()
+            ->firstOrFail();
+
+        $destinations = Destination::active()->ordered()->get();
+        $categories = TourCategory::active()->get();
+
+        return view('tours.index', [
+            'destinations' => $destinations,
+            'categories' => $categories,
+            'featuredTours' => collect(),
+            'activeDestination' => $activeDestination,
+        ]);
     }
 
     public function show(string $slug)

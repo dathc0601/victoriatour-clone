@@ -40,12 +40,15 @@ class DestinationResource extends Resource
                         Forms\Components\Textarea::make('description')
                             ->rows(4),
                     ]),
-                Forms\Components\Section::make('Media')
+                Forms\Components\Section::make('Hero Image')
                     ->schema([
-                        Forms\Components\FileUpload::make('image')
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('hero_image')
+                            ->collection('image')
                             ->image()
-                            ->directory('destinations')
-                            ->visibility('public'),
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('16:9')
+                            ->label('Hero Image')
+                            ->helperText('Recommended size: 1920x1080 pixels'),
                     ]),
                 Forms\Components\Section::make('SEO')
                     ->schema([
@@ -64,6 +67,120 @@ class DestinationResource extends Resource
                         Forms\Components\Toggle::make('is_active')
                             ->default(true),
                     ])->columns(3),
+                Forms\Components\Section::make('Visa Information')
+                    ->schema([
+                        Forms\Components\Tabs::make('Visa Content')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('English')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('visa.title_en')
+                                            ->label('Title (English)')
+                                            ->maxLength(255)
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->visa) {
+                                                    $component->state($record->visa->getTranslation('title', 'en') ?? '');
+                                                }
+                                            }),
+                                        Forms\Components\RichEditor::make('visa.content_en')
+                                            ->label('Content (English)')
+                                            ->columnSpanFull()
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->visa) {
+                                                    $component->state($record->visa->getTranslation('content', 'en') ?? '');
+                                                }
+                                            }),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Tiếng Việt')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('visa.title_vi')
+                                            ->label('Tiêu đề (Tiếng Việt)')
+                                            ->maxLength(255)
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->visa) {
+                                                    $component->state($record->visa->getTranslation('title', 'vi') ?? '');
+                                                }
+                                            }),
+                                        Forms\Components\RichEditor::make('visa.content_vi')
+                                            ->label('Nội dung (Tiếng Việt)')
+                                            ->columnSpanFull()
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->visa) {
+                                                    $component->state($record->visa->getTranslation('content', 'vi') ?? '');
+                                                }
+                                            }),
+                                    ]),
+                            ])->columnSpanFull(),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('visa.image')
+                            ->collection('image')
+                            ->image()
+                            ->label('Visa Image')
+                            ->model(fn ($record) => $record?->visa),
+                        Forms\Components\Toggle::make('visa.is_active')
+                            ->label('Active')
+                            ->default(true)
+                            ->afterStateHydrated(function ($component, $record) {
+                                if ($record?->visa) {
+                                    $component->state($record->visa->is_active);
+                                }
+                            }),
+                    ])->collapsible(),
+                Forms\Components\Section::make('Travel Policy')
+                    ->schema([
+                        Forms\Components\Tabs::make('Policy Content')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('English')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('policy.title_en')
+                                            ->label('Title (English)')
+                                            ->maxLength(255)
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->policy) {
+                                                    $component->state($record->policy->getTranslation('title', 'en') ?? '');
+                                                }
+                                            }),
+                                        Forms\Components\RichEditor::make('policy.content_en')
+                                            ->label('Content (English)')
+                                            ->columnSpanFull()
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->policy) {
+                                                    $component->state($record->policy->getTranslation('content', 'en') ?? '');
+                                                }
+                                            }),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Tiếng Việt')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('policy.title_vi')
+                                            ->label('Tiêu đề (Tiếng Việt)')
+                                            ->maxLength(255)
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->policy) {
+                                                    $component->state($record->policy->getTranslation('title', 'vi') ?? '');
+                                                }
+                                            }),
+                                        Forms\Components\RichEditor::make('policy.content_vi')
+                                            ->label('Nội dung (Tiếng Việt)')
+                                            ->columnSpanFull()
+                                            ->afterStateHydrated(function ($component, $record) {
+                                                if ($record?->policy) {
+                                                    $component->state($record->policy->getTranslation('content', 'vi') ?? '');
+                                                }
+                                            }),
+                                    ]),
+                            ])->columnSpanFull(),
+                        Forms\Components\SpatieMediaLibraryFileUpload::make('policy.image')
+                            ->collection('image')
+                            ->image()
+                            ->label('Policy Image')
+                            ->model(fn ($record) => $record?->policy),
+                        Forms\Components\Toggle::make('policy.is_active')
+                            ->label('Active')
+                            ->default(true)
+                            ->afterStateHydrated(function ($component, $record) {
+                                if ($record?->policy) {
+                                    $component->state($record->policy->is_active);
+                                }
+                            }),
+                    ])->collapsible(),
             ]);
     }
 
@@ -71,8 +188,9 @@ class DestinationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')
-                    ->disk('public'),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('hero_image')
+                    ->collection('image')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -111,6 +229,7 @@ class DestinationResource extends Resource
         return [
             RelationManagers\CitiesRelationManager::class,
             RelationManagers\ToursRelationManager::class,
+            RelationManagers\HotelsRelationManager::class,
         ];
     }
 

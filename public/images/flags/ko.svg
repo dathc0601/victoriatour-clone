@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect fill="#fff" width="900" height="600"/>
+  <g transform="rotate(-56.31) translate(-247.5,0)">
+    <rect fill="#000" y="526" width="900" height="12"/>
+    <rect fill="#000" y="556" width="900" height="12"/>
+    <rect fill="#000" y="586" width="900" height="12"/>
+  </g>
+  <g transform="rotate(56.31) translate(313.5,0)">
+    <rect fill="#000" y="526" width="900" height="12"/>
+    <rect fill="#000" y="556" width="900" height="12"/>
+    <rect fill="#000" y="586" width="900" height="12"/>
+  </g>
+  <circle fill="#c60c30" cx="450" cy="300" r="150"/>
+  <clipPath id="a"><circle cx="450" cy="300" r="150"/></clipPath>
+  <g clip-path="url(#a)">
+    <path fill="#003478" d="M450,300 c0,-82.84 67.16,-150 150,-150 v150 c0,82.84 -67.16,150 -150,150 v-150"/>
+    <circle fill="#c60c30" cx="525" cy="225" r="75"/>
+    <circle fill="#003478" cx="375" cy="375" r="75"/>
+  </g>
+</svg>

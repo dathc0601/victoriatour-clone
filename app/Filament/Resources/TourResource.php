@@ -101,13 +101,21 @@ class TourResource extends Resource
                             ]),
                         Forms\Components\Tabs\Tab::make('Media')
                             ->schema([
-                                Forms\Components\FileUpload::make('gallery')
+                                Forms\Components\SpatieMediaLibraryFileUpload::make('featured_image')
+                                    ->collection('featured_image')
+                                    ->image()
+                                    ->imageResizeMode('cover')
+                                    ->imageCropAspectRatio('16:9')
+                                    ->label('Featured Image')
+                                    ->helperText('Main image displayed in hero section and tour cards. Recommended: 1920x1080'),
+                                Forms\Components\SpatieMediaLibraryFileUpload::make('gallery')
+                                    ->collection('gallery')
                                     ->multiple()
                                     ->image()
-                                    ->directory('tours')
-                                    ->visibility('public')
-                                    ->reorderable(),
-                            ]),
+                                    ->reorderable()
+                                    ->label('Gallery Images')
+                                    ->helperText('Additional images for the photo gallery section'),
+                            ])->columns(1),
                         Forms\Components\Tabs\Tab::make('SEO')
                             ->schema([
                                 Forms\Components\TextInput::make('meta_title')
