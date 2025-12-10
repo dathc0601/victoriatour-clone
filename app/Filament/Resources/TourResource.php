@@ -81,7 +81,58 @@ class TourResource extends Resource
                             ])->columns(2),
                         Forms\Components\Tabs\Tab::make('Itinerary')
                             ->schema([
-                                Forms\Components\RichEditor::make('itinerary')
+                                Forms\Components\Repeater::make('itinerary')
+                                    ->label('Day-by-Day Itinerary')
+                                    ->schema([
+                                        Forms\Components\Grid::make(2)
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')
+                                                    ->label('Day Title')
+                                                    ->placeholder('e.g., Arrival in Bangkok')
+                                                    ->required()
+                                                    ->maxLength(255),
+                                                Forms\Components\TextInput::make('location')
+                                                    ->label('Location')
+                                                    ->placeholder('e.g., Bangkok, Thailand')
+                                                    ->maxLength(255),
+                                            ]),
+                                        Forms\Components\RichEditor::make('description')
+                                            ->label('Description')
+                                            ->toolbarButtons([
+                                                'bold',
+                                                'italic',
+                                                'bulletList',
+                                                'orderedList',
+                                                'link',
+                                            ])
+                                            ->placeholder('Describe the day activities...')
+                                            ->columnSpanFull(),
+                                        Forms\Components\TagsInput::make('highlights')
+                                            ->label('Highlights')
+                                            ->placeholder('Press Enter to add highlight')
+                                            ->helperText('Add key activities or attractions for this day')
+                                            ->columnSpanFull(),
+                                        Forms\Components\CheckboxList::make('meals')
+                                            ->label('Meals Included')
+                                            ->options([
+                                                'Breakfast' => 'Breakfast',
+                                                'Lunch' => 'Lunch',
+                                                'Dinner' => 'Dinner',
+                                            ])
+                                            ->columns(3),
+                                    ])
+                                    ->itemLabel(fn (array $state): ?string =>
+                                        isset($state['title']) && $state['title']
+                                            ? $state['title']
+                                            : 'New Day'
+                                    )
+                                    ->addActionLabel('Add Day')
+                                    ->reorderable()
+                                    ->reorderableWithButtons()
+                                    ->collapsible()
+                                    ->collapsed(fn (?Tour $record) => $record !== null)
+                                    ->cloneable()
+                                    ->defaultItems(0)
                                     ->columnSpanFull(),
                             ]),
                         Forms\Components\Tabs\Tab::make('Inclusions/Exclusions')

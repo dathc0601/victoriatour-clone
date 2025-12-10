@@ -111,13 +111,19 @@
                                 </div>
                             @endif
 
-                            @if(isset($day['meals']))
+                            @if(isset($day['meals']) && !empty($day['meals']))
+                                @php
+                                    // Handle meals as array (from checkboxes) or string (legacy)
+                                    $mealsDisplay = is_array($day['meals'])
+                                        ? implode(', ', $day['meals'])
+                                        : $day['meals'];
+                                @endphp
                                 <div class="mt-4 flex items-center gap-4 text-sm text-gray-500">
                                     <span class="flex items-center gap-1">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
-                                        Meals: {{ $day['meals'] }}
+                                        Meals: {{ $mealsDisplay }}
                                     </span>
                                 </div>
                             @endif

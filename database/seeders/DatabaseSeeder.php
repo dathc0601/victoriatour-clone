@@ -128,39 +128,6 @@ class DatabaseSeeder extends Seeder
 
         // Pages
         Page::create([
-            'title' => ['en' => 'About Us', 'vi' => 'Về Chúng Tôi'],
-            'slug' => 'about-us',
-            'content' => [
-                'en' => '<h2>Welcome to Victoria Tour</h2><p>We are a trusted B2B travel agency specializing in Asian destinations.</p>',
-                'vi' => '<h2>Chào mừng đến với Victoria Tour</h2><p>Chúng tôi là công ty du lịch B2B đáng tin cậy chuyên về các điểm đến châu Á.</p>'
-            ],
-            'template' => 'about',
-            'is_active' => true,
-        ]);
-
-        Page::create([
-            'title' => ['en' => 'MICE Services', 'vi' => 'Dịch vụ MICE'],
-            'slug' => 'mice',
-            'content' => [
-                'en' => '<h2>Meetings, Incentives, Conferences & Exhibitions</h2><p>We offer comprehensive MICE services for corporate clients.</p>',
-                'vi' => '<h2>Hội nghị, Khuyến thưởng, Hội thảo & Triển lãm</h2><p>Chúng tôi cung cấp dịch vụ MICE toàn diện cho khách hàng doanh nghiệp.</p>'
-            ],
-            'template' => 'mice',
-            'is_active' => true,
-        ]);
-
-        Page::create([
-            'title' => ['en' => 'Contact Us', 'vi' => 'Liên Hệ'],
-            'slug' => 'contact-us',
-            'content' => [
-                'en' => '<h2>Get in Touch</h2><p>We would love to hear from you.</p>',
-                'vi' => '<h2>Liên Hệ Với Chúng Tôi</h2><p>Chúng tôi rất mong được lắng nghe từ bạn.</p>'
-            ],
-            'template' => 'contact',
-            'is_active' => true,
-        ]);
-
-        Page::create([
             'title' => ['en' => 'Privacy Policy', 'vi' => 'Chính Sách Bảo Mật'],
             'slug' => 'privacy-policy',
             'content' => [
