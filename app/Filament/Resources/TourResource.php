@@ -104,7 +104,11 @@ class TourResource extends Resource
                                                 'bulletList',
                                                 'orderedList',
                                                 'link',
+                                                'attachFiles',
                                             ])
+                                            ->fileAttachmentsDisk('public')
+                                            ->fileAttachmentsDirectory('itinerary-images')
+                                            ->fileAttachmentsVisibility('public')
                                             ->placeholder('Describe the day activities...')
                                             ->columnSpanFull(),
                                         Forms\Components\TagsInput::make('highlights')
