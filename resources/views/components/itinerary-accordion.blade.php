@@ -91,7 +91,7 @@
                         <div class="px-6 py-4 border-t border-gray-100 bg-gray-50">
                             @if(isset($day['description']))
                                 <div class="prose prose-sm max-w-none text-gray-600">
-                                    {!! nl2br(e($day['description'])) !!}
+                                    {!! nl2br($day['description']) !!}
                                 </div>
                             @endif
 
