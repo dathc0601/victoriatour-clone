@@ -19,9 +19,27 @@ class SliderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 
-    protected static ?string $navigationGroup = 'Pages';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.pages');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.slider.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.slider.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.slider.navigation');
+    }
 
     public static function form(Form $form): Form
     {

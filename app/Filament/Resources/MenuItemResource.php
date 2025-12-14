@@ -18,13 +18,29 @@ class MenuItemResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
 
-    protected static ?string $navigationLabel = 'Navigation';
-
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?int $navigationSort = 1;
 
     protected static ?string $slug = 'navigation';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.settings');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.menu_item.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.menu_item.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.menu_item.navigation');
+    }
 
     public static function form(Form $form): Form
     {

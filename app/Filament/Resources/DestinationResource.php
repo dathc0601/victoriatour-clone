@@ -20,9 +20,27 @@ class DestinationResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
-    protected static ?string $navigationGroup = 'Content';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.content');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.destination.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.destination.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.destination.navigation');
+    }
 
     public static function form(Form $form): Form
     {

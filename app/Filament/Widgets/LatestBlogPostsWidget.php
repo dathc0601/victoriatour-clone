@@ -4,12 +4,15 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\BlogPostResource;
 use App\Models\BlogPost;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestBlogPostsWidget extends BaseWidget
 {
+    use HasWidgetShield;
+
     protected static ?int $sort = 5;
 
     protected int | string | array $columnSpan = 1;

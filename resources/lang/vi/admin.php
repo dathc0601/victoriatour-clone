@@ -1,6 +1,108 @@
 <?php
 
 return [
+    // Navigation Groups
+    'nav_groups' => [
+        'content' => 'Nội dung',
+        'blog' => 'Blog',
+        'inquiries' => 'Yêu cầu',
+        'pages' => 'Trang',
+        'settings' => 'Cài đặt',
+        'administration' => 'Quản trị',
+    ],
+
+    // Resources
+    'resources' => [
+        'destination' => [
+            'label' => 'Điểm đến',
+            'plural' => 'Điểm đến',
+            'navigation' => 'Điểm đến',
+        ],
+        'city' => [
+            'label' => 'Thành phố',
+            'plural' => 'Thành phố',
+            'navigation' => 'Thành phố',
+        ],
+        'tour_category' => [
+            'label' => 'Danh mục tour',
+            'plural' => 'Danh mục tour',
+            'navigation' => 'Danh mục tour',
+        ],
+        'tour' => [
+            'label' => 'Tour',
+            'plural' => 'Tour',
+            'navigation' => 'Tour',
+        ],
+        'hotel' => [
+            'label' => 'Khách sạn',
+            'plural' => 'Khách sạn',
+            'navigation' => 'Khách sạn',
+        ],
+        'mice_content' => [
+            'label' => 'Nội dung MICE',
+            'plural' => 'Nội dung MICE',
+            'navigation' => 'Nội dung MICE',
+        ],
+        'blog_category' => [
+            'label' => 'Danh mục bài viết',
+            'plural' => 'Danh mục bài viết',
+            'navigation' => 'Danh mục bài viết',
+        ],
+        'blog_post' => [
+            'label' => 'Bài viết',
+            'plural' => 'Bài viết',
+            'navigation' => 'Bài viết',
+        ],
+        'inquiry' => [
+            'label' => 'Yêu cầu',
+            'plural' => 'Yêu cầu',
+            'navigation' => 'Yêu cầu',
+        ],
+        'page' => [
+            'label' => 'Trang',
+            'plural' => 'Trang',
+            'navigation' => 'Trang',
+        ],
+        'slider' => [
+            'label' => 'Slider',
+            'plural' => 'Slider',
+            'navigation' => 'Slider',
+        ],
+        'differentiator' => [
+            'label' => 'Điểm khác biệt',
+            'plural' => 'Điểm khác biệt',
+            'navigation' => 'Điểm khác biệt',
+        ],
+        'language' => [
+            'label' => 'Ngôn ngữ',
+            'plural' => 'Ngôn ngữ',
+            'navigation' => 'Ngôn ngữ',
+        ],
+        'menu_item' => [
+            'label' => 'Mục menu',
+            'plural' => 'Mục menu',
+            'navigation' => 'Điều hướng',
+        ],
+        'user' => [
+            'label' => 'Người dùng',
+            'plural' => 'Người dùng',
+            'navigation' => 'Người dùng',
+        ],
+        'role' => [
+            'label' => 'Vai trò',
+            'plural' => 'Vai trò',
+            'navigation' => 'Vai trò',
+        ],
+    ],
+
+    // Custom Pages
+    'pages' => [
+        'settings' => 'Cài đặt',
+        'footer' => 'Chân trang',
+        'about_page' => 'Trang Giới thiệu',
+        'dashboard' => 'Bảng điều khiển',
+    ],
+
     // Dashboard Widgets
     'widgets' => [
         'quick_actions' => 'Hành động nhanh',

@@ -19,9 +19,27 @@ class DifferentiatorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-star';
 
-    protected static ?string $navigationGroup = 'Pages';
-
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.pages');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.differentiator.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.differentiator.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.differentiator.navigation');
+    }
 
     public static function form(Form $form): Form
     {

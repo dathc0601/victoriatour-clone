@@ -6,10 +6,13 @@ use App\Filament\Resources\BlogPostResource;
 use App\Filament\Resources\DestinationResource;
 use App\Filament\Resources\InquiryResource;
 use App\Filament\Resources\TourResource;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\Widget;
 
 class QuickActionsWidget extends Widget
 {
+    use HasWidgetShield;
+
     protected static ?int $sort = 2;
 
     protected int | string | array $columnSpan = 'full';

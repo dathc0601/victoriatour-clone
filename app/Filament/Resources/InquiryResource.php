@@ -16,9 +16,27 @@ class InquiryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
 
-    protected static ?string $navigationGroup = 'Inquiries';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.inquiries');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.inquiry.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.inquiry.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.inquiry.navigation');
+    }
 
     public static function getNavigationBadge(): ?string
     {

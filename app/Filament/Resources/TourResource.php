@@ -19,9 +19,27 @@ class TourResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
-    protected static ?string $navigationGroup = 'Content';
-
     protected static ?int $navigationSort = 4;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.content');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.tour.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.tour.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.tour.navigation');
+    }
 
     public static function form(Form $form): Form
     {

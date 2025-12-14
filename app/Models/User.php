@@ -3,26 +3,37 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles, HasPanelShield;
 
     /**
      * Determine if the user can access the Filament admin panel.
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        // Allow all authenticated users to access admin panel
-        // You can add more restrictive logic here, e.g.:
-        // return str_ends_with($this->email, '@victoriatour.com');
-        return true;
+        // Super Admin always has access
+        if ($this->hasRole('super_admin')) {
+            return true;
+        }
+
+        // Check for any admin role
+        return $this->hasAnyRole([
+            'super_admin',
+            'content_manager',
+            'blog_editor',
+            'inquiry_manager',
+            'settings_admin',
+        ]);
     }
 
     /**

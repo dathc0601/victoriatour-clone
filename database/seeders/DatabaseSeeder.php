@@ -235,5 +235,8 @@ class DatabaseSeeder extends Seeder
                 'is_active' => true,
             ]);
         }
+
+        // Seed roles and permissions
+        $this->call(RolesAndPermissionsSeeder::class);
     }
 }

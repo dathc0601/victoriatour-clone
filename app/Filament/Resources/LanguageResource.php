@@ -16,9 +16,27 @@ class LanguageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-language';
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.settings');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.language.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.language.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.language.navigation');
+    }
 
     public static function form(Form $form): Form
     {

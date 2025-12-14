@@ -4,12 +4,15 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\TourResource;
 use App\Models\Tour;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestToursWidget extends BaseWidget
 {
+    use HasWidgetShield;
+
     protected static ?int $sort = 4;
 
     protected int | string | array $columnSpan = 1;

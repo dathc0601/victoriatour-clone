@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\AboutPage;
 use App\Models\AboutStrength;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -14,12 +15,26 @@ use Filament\Forms\Contracts\HasForms;
 class AboutPageSettings extends Page implements HasForms
 {
     use InteractsWithForms;
+    use HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
-    protected static ?string $navigationGroup = 'Pages';
-    protected static ?string $navigationLabel = 'About Page';
     protected static ?int $navigationSort = 2;
     protected static string $view = 'filament.pages.about-page-settings';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.pages');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.pages.about_page');
+    }
+
+    public function getTitle(): string
+    {
+        return __('admin.pages.about_page');
+    }
 
     public ?array $data = [];
     public ?array $strengthsData = [];

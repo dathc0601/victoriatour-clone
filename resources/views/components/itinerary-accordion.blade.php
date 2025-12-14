@@ -34,6 +34,62 @@
             }
         }
     }
+
+    /**
+     * Process description HTML to:
+     * 1. Convert video links to video players
+     * 2. Remove file info links (filename with size) that Filament adds after attachments
+     */
+    if (!function_exists('processDescriptionMedia')) {
+        function processDescriptionMedia($html) {
+            if (empty($html)) {
+                return $html;
+            }
+
+            // Remove file info links that show filename and size (e.g., "filename.jpg 67.28 KB")
+            // These are <a> tags that contain just filename and file size text
+            $html = preg_replace(
+                '/<a\s+[^>]*href="[^"]*\/itinerary-images\/[^"]*"[^>]*>[^<]*\.(jpeg|jpg|png|gif|webp|mp4|webm|mov|avi)\s*[\d.]+\s*(KB|MB|GB)<\/a>/i',
+                '',
+                $html
+            );
+
+            // Also remove any standalone file links with size info (more generic pattern)
+            $html = preg_replace(
+                '/<a\s+[^>]*href="[^"]*"[^>]*>[^<]*\.(jpeg|jpg|png|gif|webp|mp4|webm|mov|avi)\s+[\d.]+\s*(KB|MB|GB)<\/a>/i',
+                '',
+                $html
+            );
+
+            // Convert video links to video players
+            // Match <a> tags linking to video files
+            $html = preg_replace_callback(
+                '/<a\s+[^>]*href="([^"]*\.(mp4|webm|mov))"[^>]*>.*?<\/a>/i',
+                function ($matches) {
+                    $videoUrl = $matches[1];
+                    $extension = strtolower($matches[2]);
+                    $mimeTypes = [
+                        'mp4' => 'video/mp4',
+                        'webm' => 'video/webm',
+                        'mov' => 'video/quicktime',
+                    ];
+                    $mimeType = $mimeTypes[$extension] ?? 'video/mp4';
+
+                    return '<video controls class="w-full max-w-2xl rounded-lg shadow-md my-4">
+                        <source src="' . htmlspecialchars($videoUrl) . '" type="' . $mimeType . '">
+                        Your browser does not support the video tag.
+                    </video>';
+                },
+                $html
+            );
+
+            // Clean up any remaining empty paragraphs or line breaks after removals
+            $html = preg_replace('/<p>\s*<\/p>/', '', $html);
+            $html = preg_replace('/(<br\s*\/?>\s*){3,}/', '<br><br>', $html);
+
+            return $html;
+        }
+    }
 @endphp
 
 @if($itinerary)
@@ -90,8 +146,8 @@
                     >
                         <div class="px-6 py-4 border-t border-gray-100 bg-gray-50">
                             @if(isset($day['description']))
-                                <div class="prose prose-sm max-w-none text-gray-600 prose-img:rounded-lg prose-img:shadow-md">
-                                    {!! $day['description'] !!}
+                                <div class="prose prose-sm max-w-none text-gray-600 prose-img:rounded-lg prose-img:shadow-md prose-video:rounded-lg prose-video:shadow-md">
+                                    {!! processDescriptionMedia($day['description']) !!}
                                 </div>
                             @endif
 

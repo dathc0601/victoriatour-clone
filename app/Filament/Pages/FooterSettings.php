@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Models\Destination;
 use App\Models\FooterColumn;
 use App\Models\Setting;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -15,13 +16,27 @@ use Filament\Forms\Contracts\HasForms;
 class FooterSettings extends Page implements HasForms
 {
     use InteractsWithForms;
+    use HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-group';
-    protected static ?string $navigationLabel = 'Footer';
-    protected static ?string $navigationGroup = 'Settings';
     protected static ?int $navigationSort = 3;
     protected static ?string $slug = 'footer';
     protected static string $view = 'filament.pages.footer-settings';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.pages.footer');
+    }
+
+    public function getTitle(): string
+    {
+        return __('admin.pages.footer');
+    }
 
     public ?array $data = [];
 

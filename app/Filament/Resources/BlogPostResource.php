@@ -19,9 +19,27 @@ class BlogPostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $navigationGroup = 'Blog';
-
     protected static ?int $navigationSort = 2;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.blog');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.blog_post.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.blog_post.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.blog_post.navigation');
+    }
 
     public static function form(Form $form): Form
     {

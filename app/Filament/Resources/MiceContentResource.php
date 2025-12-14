@@ -17,9 +17,27 @@ class MiceContentResource extends Resource
 
     protected static ?string $model = MiceContent::class;
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
-    protected static ?string $navigationGroup = 'Content';
-    protected static ?string $navigationLabel = 'MICE Content';
     protected static ?int $navigationSort = 6;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.content');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('admin.resources.mice_content.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('admin.resources.mice_content.plural');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.resources.mice_content.navigation');
+    }
 
     public static function form(Form $form): Form
     {

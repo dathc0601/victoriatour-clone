@@ -7,11 +7,14 @@ use App\Models\Destination;
 use App\Models\Inquiry;
 use App\Models\Page;
 use App\Models\Tour;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsOverviewWidget extends BaseWidget
 {
+    use HasWidgetShield;
+
     protected static ?int $sort = 1;
 
     protected function getStats(): array

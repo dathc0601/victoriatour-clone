@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\Setting;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -13,11 +14,26 @@ use Filament\Forms\Contracts\HasForms;
 class Settings extends Page implements HasForms
 {
     use InteractsWithForms;
+    use HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
-    protected static ?string $navigationGroup = 'Settings';
     protected static ?int $navigationSort = 2;
     protected static string $view = 'filament.pages.settings';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('admin.nav_groups.settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.pages.settings');
+    }
+
+    public function getTitle(): string
+    {
+        return __('admin.pages.settings');
+    }
 
     public ?array $data = [];
 
