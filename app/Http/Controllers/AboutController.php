@@ -9,7 +9,12 @@ class AboutController extends Controller
 {
     public function show()
     {
-        $about = AboutPage::getContent();
+        try {
+            $about = AboutPage::getContent();
+        } catch (\Exception $e) {
+            $about = new AboutPage();
+        }
+
         $strengths = AboutStrength::active()->ordered()->get();
 
         return view('pages.about', compact('about', 'strengths'));

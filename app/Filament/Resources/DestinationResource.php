@@ -128,11 +128,10 @@ class DestinationResource extends Resource
                                             }),
                                     ]),
                             ])->columnSpanFull(),
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('visa.image')
-                            ->collection('image')
+                        Forms\Components\FileUpload::make('visa.image')
                             ->image()
-                            ->label('Visa Image')
-                            ->model(fn ($record) => $record?->visa),
+                            ->directory('temp-uploads')
+                            ->label('Visa Image'),
                         Forms\Components\Toggle::make('visa.is_active')
                             ->label('Active')
                             ->default(true)
@@ -185,11 +184,10 @@ class DestinationResource extends Resource
                                             }),
                                     ]),
                             ])->columnSpanFull(),
-                        Forms\Components\SpatieMediaLibraryFileUpload::make('policy.image')
-                            ->collection('image')
+                        Forms\Components\FileUpload::make('policy.image')
                             ->image()
-                            ->label('Policy Image')
-                            ->model(fn ($record) => $record?->policy),
+                            ->directory('temp-uploads')
+                            ->label('Policy Image'),
                         Forms\Components\Toggle::make('policy.is_active')
                             ->label('Active')
                             ->default(true)

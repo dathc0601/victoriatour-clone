@@ -47,6 +47,13 @@ class EditDestination extends EditRecord
             $visa->setTranslation('content', 'vi', $visaData['content_vi'] ?? '');
             $visa->is_active = $visaData['is_active'] ?? true;
             $visa->save();
+
+            // Handle image upload (only if new file uploaded)
+            if (!empty($visaData['image']) && is_string($visaData['image'])) {
+                $visa->clearMediaCollection('image');
+                $visa->addMediaFromDisk($visaData['image'], 'public')
+                    ->toMediaCollection('image');
+            }
         }
 
         // Save Policy data
@@ -60,6 +67,13 @@ class EditDestination extends EditRecord
             $policy->setTranslation('content', 'vi', $policyData['content_vi'] ?? '');
             $policy->is_active = $policyData['is_active'] ?? true;
             $policy->save();
+
+            // Handle image upload (only if new file uploaded)
+            if (!empty($policyData['image']) && is_string($policyData['image'])) {
+                $policy->clearMediaCollection('image');
+                $policy->addMediaFromDisk($policyData['image'], 'public')
+                    ->toMediaCollection('image');
+            }
         }
     }
 }
