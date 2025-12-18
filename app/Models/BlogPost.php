@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasAutoTranslation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,10 +14,11 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class BlogPost extends Model implements HasMedia
 {
-    use HasFactory, HasTranslations, HasSlug, InteractsWithMedia;
+    use HasFactory, HasTranslations, HasSlug, InteractsWithMedia, HasAutoTranslation;
 
     protected $fillable = [
         'blog_category_id',
+        'source_locale',
         'title',
         'slug',
         'excerpt',

@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlogPostResource\Pages;
 use App\Models\BlogPost;
+use App\Models\Language;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -47,6 +48,13 @@ class BlogPostResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Basic Information')
                     ->schema([
+                        Forms\Components\Select::make('source_locale')
+                            ->label('Original Language')
+                            ->options(fn () => Language::active()->pluck('name', 'code'))
+                            ->default('en')
+                            ->required()
+                            ->helperText('The language you are writing this content in. Other languages will be auto-translated.')
+                            ->columnSpanFull(),
                         Forms\Components\Select::make('blog_category_id')
                             ->relationship('category', 'name')
                             ->searchable()
@@ -116,6 +124,9 @@ class BlogPostResource extends Resource
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
+                Tables\Columns\ViewColumn::make('translation_status')
+                    ->label('Translations')
+                    ->view('filament.tables.columns.translation-status'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')

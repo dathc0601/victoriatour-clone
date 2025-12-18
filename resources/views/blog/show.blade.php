@@ -58,6 +58,11 @@
     </section>
 
     {{-- ============================================
+         TRANSLATION PENDING NOTICE
+         ============================================ --}}
+    <x-translation-pending :model="$post" class="container mx-auto px-4 pt-8" />
+
+    {{-- ============================================
          AUTHOR SECTION
          ============================================ --}}
     <section class="py-8 bg-white border-b border-gray-100">
