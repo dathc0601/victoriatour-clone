@@ -3,14 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlogPostResource\Pages;
+use App\Jobs\TranslateModel;
 use App\Models\BlogPost;
 use App\Models\Language;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Collection;
 
 class BlogPostResource extends Resource
 {
@@ -140,6 +143,26 @@ class BlogPostResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('translate')
+                        ->label('Translate')
+                        ->icon('heroicon-o-language')
+                        ->color('info')
+                        ->requiresConfirmation()
+                        ->modalHeading('Translate Selected Posts')
+                        ->modalDescription('This will queue translation jobs for all selected posts. Posts will be translated to all active languages.')
+                        ->modalSubmitActionLabel('Start Translation')
+                        ->action(function (Collection $records): void {
+                            foreach ($records as $record) {
+                                TranslateModel::dispatch($record);
+                            }
+
+                            Notification::make()
+                                ->title('Translation Queued')
+                                ->body(count($records) . ' posts have been queued for translation.')
+                                ->success()
+                                ->send();
+                        })
+                        ->deselectRecordsAfterCompletion(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
