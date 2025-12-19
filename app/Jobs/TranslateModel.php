@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\Language;
 use App\Services\TranslationService;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -12,13 +13,26 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class TranslateModel implements ShouldQueue
+class TranslateModel implements ShouldQueue, ShouldBeUnique
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public int $tries = 3;
     public int $backoff = 60;
     public int $timeout = 600; // 10 minutes
+    public int $uniqueFor = 600; // 10 minutes - same as timeout
+
+    /**
+     * Unique ID for the job (prevents duplicates in queue).
+     */
+    public function uniqueId(): string
+    {
+        $modelClass = get_class($this->model);
+        $modelId = $this->model->id;
+        $locale = $this->targetLocale ?? 'all';
+
+        return "{$modelClass}:{$modelId}:{$locale}";
+    }
 
     /**
      * Create a new job instance.
