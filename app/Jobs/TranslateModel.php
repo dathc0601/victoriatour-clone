@@ -18,9 +18,9 @@ class TranslateModel implements ShouldQueue, ShouldBeUnique
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public int $tries = 3;
-    public int $backoff = 60;
+    public int $backoff = 600; // 10 minutes between retries
     public int $timeout = 600; // 10 minutes
-    public int $uniqueFor = 600; // 10 minutes - same as timeout
+    public int $uniqueFor = 86400; // 24 hours - prevent re-queueing same post
 
     /**
      * Unique ID for the job (prevents duplicates in queue).

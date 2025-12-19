@@ -118,10 +118,10 @@ class GeminiService
                 $lastException = $e;
                 $attempt++;
 
-                // If it's a rate limit error, wait and retry
+                // If it's a rate limit error, wait 10 minutes and retry
                 if (str_contains($e->getMessage(), '429') || str_contains($e->getMessage(), 'Rate limit')) {
-                    $waitSeconds = min(60 * $attempt, 180); // 60s, 120s, 180s max
-                    Log::warning("Rate limit hit, waiting {$waitSeconds}s before retry {$attempt}/{$maxRetries}");
+                    $waitSeconds = 600; // 10 minutes
+                    Log::warning("Rate limit hit, waiting {$waitSeconds}s (10 min) before retry {$attempt}/{$maxRetries}");
                     sleep($waitSeconds);
                 } else {
                     // For other errors, don't retry
