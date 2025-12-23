@@ -18,7 +18,7 @@ class ProcessTranslations extends Command
     /**
      * The console command description.
      */
-    protected $description = 'Process pending translations via Gemini API';
+    protected $description = 'Process pending translations via configured translation provider';
 
     /**
      * Execute the console command.

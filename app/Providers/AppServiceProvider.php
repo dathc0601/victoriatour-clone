@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\TranslationProviderService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Register TranslationProviderService as a singleton
+        $this->app->singleton(TranslationProviderService::class);
     }
 
     /**

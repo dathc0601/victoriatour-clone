@@ -3,6 +3,16 @@
 return [
     /*
     |--------------------------------------------------------------------------
+    | Translation Provider
+    |--------------------------------------------------------------------------
+    |
+    | Specify which translation provider to use: 'gemini' or 'openrouter'
+    |
+    */
+    'provider' => env('TRANSLATION_PROVIDER', 'gemini'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Gemini API Configuration
     |--------------------------------------------------------------------------
     |
@@ -14,6 +24,22 @@ return [
         'model' => env('GEMINI_MODEL', 'gemini-2.0-flash'),
         'max_tokens' => env('GEMINI_MAX_TOKENS', 8192),
         'temperature' => env('GEMINI_TEMPERATURE', 0.3),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | OpenRouter API Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for OpenRouter API used for automatic translations.
+    | OpenRouter provides access to multiple LLM models via a single API.
+    |
+    */
+    'openrouter' => [
+        'api_key' => env('OPENROUTER_API_KEY'),
+        'model' => env('OPENROUTER_MODEL', 'google/gemini-2.0-flash-001'),
+        'max_tokens' => env('OPENROUTER_MAX_TOKENS', 8192),
+        'temperature' => env('OPENROUTER_TEMPERATURE', 0.3),
     ],
 
     /*

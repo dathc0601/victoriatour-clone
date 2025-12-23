@@ -16,6 +16,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^3.7",
         "mews/purifier": "^3.4",
+        "moe-mizrak/laravel-openrouter": "^2.7",
         "solution-forest/filament-tree": "^2.1",
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-permission": "^6.24",

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class TranslationService
 {
     public function __construct(
-        private GeminiService $gemini
+        private TranslationProviderService $translationProvider
     ) {}
 
     /**
@@ -121,7 +121,7 @@ class TranslationService
                     continue;
                 }
 
-                $translatedContent = $this->gemini->translateWithRetry(
+                $translatedContent = $this->translationProvider->translateWithRetry(
                     $sourceContent,
                     $sourceLocale,
                     $targetLocale,

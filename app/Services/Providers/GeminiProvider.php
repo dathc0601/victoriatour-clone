@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Providers;
 
+use App\Contracts\TranslationProviderInterface;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Client\RequestException;
 
-class GeminiService
+class GeminiProvider implements TranslationProviderInterface
 {
     private string $apiKey;
     private string $model;
@@ -17,6 +18,14 @@ class GeminiService
     {
         $this->apiKey = config('translation.gemini.api_key', '');
         $this->model = config('translation.gemini.model', 'gemini-2.0-flash');
+    }
+
+    /**
+     * Get the provider name for logging purposes.
+     */
+    public function getProviderName(): string
+    {
+        return 'gemini';
     }
 
     /**
@@ -55,6 +64,7 @@ class GeminiService
 
                 if ($translation === null) {
                     Log::warning('Gemini API returned empty translation', [
+                        'provider' => $this->getProviderName(),
                         'source_locale' => $sourceLocale,
                         'target_locale' => $targetLocale,
                         'response' => $response->json(),
@@ -69,6 +79,7 @@ class GeminiService
             $errorStatus = $errorBody['error']['status'] ?? 'UNKNOWN';
 
             Log::error('Gemini API error', [
+                'provider' => $this->getProviderName(),
                 'http_status' => $response->status(),
                 'error_status' => $errorStatus,
                 'error_message' => $errorMessage,
@@ -94,6 +105,7 @@ class GeminiService
 
         } catch (RequestException $e) {
             Log::error('Gemini API request failed', [
+                'provider' => $this->getProviderName(),
                 'error' => $e->getMessage(),
                 'source_locale' => $sourceLocale,
                 'target_locale' => $targetLocale,
@@ -121,7 +133,9 @@ class GeminiService
                 // If it's a rate limit error, wait 10 minutes and retry
                 if (str_contains($e->getMessage(), '429') || str_contains($e->getMessage(), 'Rate limit')) {
                     $waitSeconds = 600; // 10 minutes
-                    Log::warning("Rate limit hit, waiting {$waitSeconds}s (10 min) before retry {$attempt}/{$maxRetries}");
+                    Log::warning("Rate limit hit, waiting {$waitSeconds}s (10 min) before retry {$attempt}/{$maxRetries}", [
+                        'provider' => $this->getProviderName(),
+                    ]);
                     sleep($waitSeconds);
                 } else {
                     // For other errors, don't retry
@@ -136,7 +150,7 @@ class GeminiService
     /**
      * Build the translation prompt.
      */
-    private function buildTranslationPrompt(string $text, string $source, string $target, string $context): string
+    public function buildTranslationPrompt(string $text, string $source, string $target, string $context): string
     {
         $sourceLanguage = $this->getLanguageName($source);
         $targetLanguage = $this->getLanguageName($target);
@@ -231,7 +245,7 @@ PROMPT;
     /**
      * Get human-readable language name.
      */
-    private function getLanguageName(string $code): string
+    public function getLanguageName(string $code): string
     {
         return match($code) {
             'en' => 'English',
@@ -262,7 +276,9 @@ PROMPT;
 
         if ($requests >= $limit) {
             $waitSeconds = 60 - now()->second;
-            Log::info("Rate limit reached, waiting {$waitSeconds} seconds");
+            Log::info("Rate limit reached, waiting {$waitSeconds} seconds", [
+                'provider' => $this->getProviderName(),
+            ]);
             sleep($waitSeconds > 0 ? $waitSeconds : 1);
         }
     }
