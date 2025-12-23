@@ -153,7 +153,7 @@ class BlogPostResource extends Resource
                         ->modalSubmitActionLabel('Start Translation')
                         ->action(function (Collection $records): void {
                             foreach ($records as $record) {
-                                TranslateModel::dispatch($record);
+                                TranslateModel::dispatch($record, null, force: true);
                             }
 
                             Notification::make()
