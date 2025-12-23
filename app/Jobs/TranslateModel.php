@@ -30,8 +30,9 @@ class TranslateModel implements ShouldQueue, ShouldBeUnique
         $modelClass = get_class($this->model);
         $modelId = $this->model->id;
         $locale = $this->targetLocale ?? 'all';
+        $forceFlag = $this->force ? 'force' : 'normal';
 
-        return "{$modelClass}:{$modelId}:{$locale}";
+        return "{$modelClass}:{$modelId}:{$locale}:{$forceFlag}";
     }
 
     /**
@@ -39,7 +40,8 @@ class TranslateModel implements ShouldQueue, ShouldBeUnique
      */
     public function __construct(
         public Model $model,
-        public ?string $targetLocale = null
+        public ?string $targetLocale = null,
+        public bool $force = false
     ) {}
 
     /**
@@ -58,7 +60,7 @@ class TranslateModel implements ShouldQueue, ShouldBeUnique
 
         // If specific locale provided, translate to that locale only
         if ($this->targetLocale) {
-            $translationService->translateModel($this->model, $this->targetLocale);
+            $translationService->translateModel($this->model, $this->targetLocale, $this->force);
             return;
         }
 
@@ -70,7 +72,7 @@ class TranslateModel implements ShouldQueue, ShouldBeUnique
 
         foreach ($targetLocales as $locale) {
             try {
-                $translationService->translateModel($this->model, $locale);
+                $translationService->translateModel($this->model, $locale, $this->force);
 
                 // Small delay between locales
                 usleep(500000); // 0.5 seconds

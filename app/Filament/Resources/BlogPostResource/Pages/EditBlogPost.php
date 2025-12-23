@@ -35,7 +35,7 @@ class EditBlogPost extends EditRecord
                         ->pluck('code');
 
                     foreach ($targetLocales as $locale) {
-                        TranslateModel::dispatch($record, $locale);
+                        TranslateModel::dispatch($record, $locale, force: true);
                     }
 
                     Notification::make()

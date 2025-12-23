@@ -75,7 +75,7 @@ class TranslationService
     /**
      * Translate a model to a specific target locale.
      */
-    public function translateModel(Model $model, string $targetLocale): bool
+    public function translateModel(Model $model, string $targetLocale, bool $force = false): bool
     {
         if (!$this->isTranslatable($model)) {
             return false;
@@ -94,8 +94,8 @@ class TranslationService
                 'field' => $field,
             ])->first();
 
-            // Skip if already completed
-            if ($translation && $translation->status === 'completed') {
+            // Skip if already completed (unless force is enabled)
+            if (!$force && $translation && $translation->status === 'completed') {
                 continue;
             }
 
