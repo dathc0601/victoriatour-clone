@@ -43,8 +43,10 @@ class EditBlogPost extends EditRecord
                         ->body('Content has been queued for translation.')
                         ->success()
                         ->send();
-                })
-                ->successRedirectUrl(fn () => $this->getResource()::getUrl('edit', ['record' => $this->record])),
+
+                    // Direct redirect prevents modal unmount race condition
+                    $this->redirect($this->getResource()::getUrl('edit', ['record' => $this->record]));
+                }),
             Actions\DeleteAction::make(),
         ];
     }

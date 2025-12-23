@@ -24,15 +24,23 @@ class TranslateModel implements ShouldQueue, ShouldBeUnique
 
     /**
      * Unique ID for the job (prevents duplicates in queue).
+     *
+     * For force translations (manual "Translate Now"), include timestamp
+     * to allow each click to queue new jobs. Automatic translations
+     * use stable IDs to prevent duplicates.
      */
     public function uniqueId(): string
     {
         $modelClass = get_class($this->model);
         $modelId = $this->model->id;
         $locale = $this->targetLocale ?? 'all';
-        $forceFlag = $this->force ? 'force' : 'normal';
 
-        return "{$modelClass}:{$modelId}:{$locale}:{$forceFlag}";
+        // For force translations, add timestamp to make each dispatch unique
+        if ($this->force) {
+            return "{$modelClass}:{$modelId}:{$locale}:force:" . now()->timestamp;
+        }
+
+        return "{$modelClass}:{$modelId}:{$locale}:normal";
     }
 
     /**
