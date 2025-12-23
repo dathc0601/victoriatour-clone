@@ -81,6 +81,13 @@ class TranslationService
             return false;
         }
 
+        Log::info('translateModel called', [
+            'model' => get_class($model),
+            'id' => $model->id,
+            'target_locale' => $targetLocale,
+            'force' => $force,
+        ]);
+
         $sourceLocale = $model->source_locale ?? config('translation.default_source_locale', 'en');
         $translatableFields = $model->translatable ?? [];
         $modelType = class_basename($model);
@@ -96,6 +103,13 @@ class TranslationService
 
             // Skip if already completed (unless force is enabled)
             if (!$force && $translation && $translation->status === 'completed') {
+                Log::info('Translation skipped (already completed)', [
+                    'model' => get_class($model),
+                    'id' => $model->id,
+                    'field' => $field,
+                    'target_locale' => $targetLocale,
+                    'force' => $force,
+                ]);
                 continue;
             }
 
