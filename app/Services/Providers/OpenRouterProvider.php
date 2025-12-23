@@ -151,21 +151,27 @@ class OpenRouterProvider implements TranslationProviderInterface
      */
     private function extractTranslation($response): ?string
     {
-        // ResponseData has choices array with NonStreamingChoiceData objects
+        // ResponseData has choices array
         if (empty($response->choices)) {
             return null;
         }
 
         $choice = $response->choices[0];
 
-        // NonStreamingChoiceData has a message property (MessageData)
-        if (isset($choice->message) && $choice->message instanceof MessageData) {
-            return $choice->message->content;
+        // Handle array format (most common from API)
+        if (is_array($choice)) {
+            return $choice['message']['content'] ?? null;
         }
 
-        // Fallback for array access
-        if (is_object($choice) && property_exists($choice, 'message')) {
-            return $choice->message->content ?? null;
+        // Handle object format (NonStreamingChoiceData)
+        if (is_object($choice)) {
+            if (property_exists($choice, 'message')) {
+                $message = $choice->message;
+                if (is_array($message)) {
+                    return $message['content'] ?? null;
+                }
+                return $message->content ?? null;
+            }
         }
 
         return null;
