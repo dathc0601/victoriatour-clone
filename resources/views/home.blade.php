@@ -4,75 +4,11 @@
 @section('meta_description', 'Victoria Tour - Your trusted travel partner for unforgettable journeys across Southeast Asia. Discover Vietnam, Thailand, Cambodia, and more.')
 
 @section('content')
-    <!-- Hero Slider -->
-    <x-hero-slider :sliders="$sliders" />
-
-    <!-- Featured Tours (Inspirations Style) - Moved to right after hero -->
-    <section class="py-16 bg-white overflow-hidden">
-        <div class="container mx-auto px-4">
-            <x-section-title
-                icon="images/logo-icon.svg"
-                :title="__('messages.home.featured_tours')"
-                :subtitle="__('messages.home.featured_tours_desc')"
-            />
-        </div>
-
-        <!-- Slider Container -->
-        <div class="relative mt-12 px-4 lg:px-12">
-            <!-- Swiper Slider -->
-            <div class="swiper tours-slider" id="toursSlider">
-                <div class="swiper-wrapper">
-                    @foreach($featuredTours as $tour)
-                        <div class="swiper-slide">
-                            <x-tour-card :tour="$tour" />
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <!-- Navigation Arrows (Always Visible) -->
-            <button class="tours-slider-prev absolute left-0 lg:-left-2 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:bg-primary-500 hover:text-white transition-all duration-300 hover:shadow-xl hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <button class="tours-slider-next absolute right-0 lg:-right-2 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:bg-primary-500 hover:text-white transition-all duration-300 hover:shadow-xl hover:scale-110 disabled:opacity-40 disabled:cursor-not-allowed">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </button>
-
-            <!-- Scrollbar -->
-            <div class="tours-slider-scrollbar mt-10 mx-auto max-w-lg"></div>
-        </div>
-    </section>
-
-    @push('scripts')
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new Swiper('#toursSlider', {
-            modules: [SwiperModules.Navigation, SwiperModules.Scrollbar],
-            slidesPerView: 1,
-            spaceBetween: 20,
-            grabCursor: true,
-            navigation: {
-                nextEl: '.tours-slider-next',
-                prevEl: '.tours-slider-prev',
-            },
-            scrollbar: {
-                el: '.tours-slider-scrollbar',
-                draggable: true,
-                hide: false,
-            },
-            breakpoints: {
-                480: { slidesPerView: 1.5, spaceBetween: 16 },
-                640: { slidesPerView: 2, spaceBetween: 20 },
-                1024: { slidesPerView: 3, spaceBetween: 24 },
-                1280: { slidesPerView: 4, spaceBetween: 24 },
-            }
-        });
-    });
-    </script>
-    @endpush
+    <!-- Hero Slider with Integrated Featured Tours -->
+    <x-hero-slider :sliders="$sliders" :featuredTours="$featuredTours" />
 
     <!-- Differentiators Section (What Makes Us Different) -->
-    <section class="different-section relative py-20 overflow-hidden">
+    <section class="different-section relative py-12 overflow-hidden">
         <!-- Decorative Backgrounds -->
         <img src="{{ asset('images/bg-different-right.svg') }}"
              alt=""
@@ -80,20 +16,20 @@
              aria-hidden="true">
 
         <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 items-center">
                 <!-- Left Column: Title -->
                 <div class="lg:col-span-1 text-center lg:text-left" data-aos="fade-right">
-                    <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-gray-800 leading-tight mb-5">
+                    <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-normal text-gray-800 leading-tight mb-3">
                         {{ __('messages.home.why_choose_us') }}
                     </h2>
-                    <p class="text-gray-600 leading-relaxed text-base">
+                    <p class="text-gray-600 leading-relaxed text-sm">
                         {{ __('messages.home.why_choose_us_desc') }}
                     </p>
                 </div>
 
                 <!-- Right Column: Icons Grid -->
                 <div class="lg:col-span-3">
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
                         @foreach($differentiators as $item)
                             <x-differentiator-card :differentiator="$item" />
                         @endforeach
@@ -103,7 +39,7 @@
         </div>
     </section>
 
-    <!-- Popular Destinations - Bento Grid -->
+    <!-- Popular Destinations - Bento Grid (Cities with Recent Tours) -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <x-section-title
@@ -113,9 +49,9 @@
 
             <!-- Bento Grid Layout -->
             <div class="destinations-bento mt-12">
-                @foreach($featuredDestinations as $index => $destination)
-                    <x-destination-card
-                        :destination="$destination"
+                @foreach($featuredCities as $index => $city)
+                    <x-city-bento-card
+                        :city="$city"
                         :variant="match($index) {
                             0 => 'tall',
                             2 => 'large',

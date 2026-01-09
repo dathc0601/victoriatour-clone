@@ -71,6 +71,9 @@
     <!-- Toast Notifications -->
     <x-toast-notifications />
 
+    <!-- Sticky Contact Buttons -->
+    <x-sticky-contact-buttons />
+
     <!-- Back to Top Button -->
     <x-back-to-top />
 

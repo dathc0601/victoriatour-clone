@@ -15,10 +15,10 @@
 
     <!-- Mobile Header -->
     <div id="header-mobi" class="lg:hidden flex justify-between items-center h-[80px] px-4">
-        <!-- Logo -->
+        <!-- Logo - Larger for better visibility -->
         <a href="{{ route('home') }}" class="flex-shrink-0 logo-link">
             @if($headerLogo)
-                <img src="{{ Storage::url($headerLogo) }}" alt="{{ config('app.name') }}" class="h-10 transition-all duration-300">
+                <img src="{{ Storage::url($headerLogo) }}" alt="{{ config('app.name') }}" class="max-h-14 w-auto transition-all duration-300">
             @else
                 <span class="text-2xl font-heading font-bold tracking-tight">
                     <span class="logo-victoria transition-colors duration-300" :class="scrolled ? 'text-primary-500' : 'text-white'">Victoria</span><span class="logo-tour transition-colors duration-300" :class="scrolled ? 'text-accent-500' : 'text-accent-400'">Tour</span>
@@ -80,24 +80,20 @@
         </div>
     </div>
 
-    <!-- Desktop Header -->
-    <div class="header-layout hidden lg:flex justify-between items-center h-[100px] px-8 xl:px-16 max-w-[1800px] mx-auto">
-        <!-- Left Section: Logo + Navigation -->
-        <div class="header-layout1 flex items-center gap-12">
-            <!-- Logo -->
-            <a href="{{ route('home') }}" class="flex-shrink-0 logo-link group">
-                @if($headerLogo)
-                    <img src="{{ Storage::url($headerLogo) }}" alt="{{ config('app.name') }}" class="h-12 transition-all duration-300 group-hover:scale-105">
-                @else
-                    <span class="text-[28px] font-heading font-bold tracking-tight">
-                        <span class="logo-victoria transition-all duration-300 group-hover:tracking-wide" :class="scrolled ? 'text-primary-500' : 'text-white'">Victoria</span><span class="logo-tour transition-all duration-300 text-accent-500" :class="scrolled ? 'text-accent-500' : 'text-accent-400'">Tour</span>
-                    </span>
-                @endif
-            </a>
+    <!-- Desktop Header - Centered Logo Layout -->
+    @php
+        $allNavItems = navigation('header');
+        $totalItems = $allNavItems->count();
+        $splitAt = (int) ceil($totalItems / 2);
+        $leftNav = $allNavItems->take($splitAt);
+        $rightNav = $allNavItems->skip($splitAt);
+    @endphp
 
-            <!-- Primary Navigation -->
-            <nav class="flex items-center gap-1">
-                @foreach(navigation('header') as $item)
+    <div class="header-desktop hidden px-8 xl:px-16 gap-8 lg:block">
+        <div class="w-full container mx-auto lg:grid grid-cols-[1fr_auto_1fr] h-[110px] flex items-center">
+            <!-- Left Navigation (aligned to left edge) -->
+            <nav class="flex items-center justify-start gap-1">
+                @foreach($leftNav as $item)
                     @if($item->hasChildren())
                         {{-- Dropdown Menu --}}
                         <div class="relative" x-data="{ dropOpen: false }" @mouseenter="dropOpen = true" @mouseleave="dropOpen = false">
@@ -157,82 +153,158 @@
                     @endif
                 @endforeach
             </nav>
-        </div>
 
-        <!-- Right Section: Phone, Language, Search -->
-        <div class="header-layout2 flex items-center gap-6">
-            <!-- Hotline -->
-            <a href="tel:{{ App\Models\Setting::get('contact_phone', '+84 85 692 9229') }}" class="hotline-link group flex items-center gap-3 transition-all duration-300">
-                <div class="hotline-icon-wrapper relative">
-                    <div class="absolute inset-0 bg-accent-500/20 rounded-full animate-ping-slow"></div>
-                    <div class="relative w-10 h-10 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center shadow-lg shadow-accent-500/30">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <span class="text-[11px] uppercase tracking-wider hotline-label transition-colors duration-300" :class="scrolled ? 'text-gray-500' : 'text-white/70'">Hotline 24/7</span>
-                    <span class="text-[15px] font-semibold hotline-number group-hover:tracking-wide transition-all duration-300" :class="scrolled ? 'text-primary-600' : 'text-white'">{{ App\Models\Setting::get('contact_phone', '+84 85 692 9229') }}</span>
-                </div>
+            <!-- Center: Logo (Prominent) -->
+            <a href="{{ route('home') }}" class="flex-shrink-0 logo-link group flex items-center justify-center">
+                @if($headerLogo)
+                    <img src="{{ Storage::url($headerLogo) }}"
+                         alt="{{ config('app.name') }}"
+                         class="max-h-[70px] w-auto transition-all duration-300 group-hover:scale-105">
+                @else
+                    <span class="text-[32px] font-heading font-bold tracking-tight">
+                    <span class="logo-victoria transition-all duration-300 group-hover:tracking-wide" :class="scrolled ? 'text-primary-500' : 'text-white'">Victoria</span><span class="logo-tour transition-all duration-300" :class="scrolled ? 'text-accent-500' : 'text-accent-400'">Tour</span>
+                </span>
+                @endif
             </a>
 
-            <!-- Divider -->
-            <div class="h-8 w-px header-divider transition-colors duration-300" :class="scrolled ? 'bg-gray-200' : 'bg-white/30'"></div>
+            <!-- Right: Navigation + Utilities (aligned to right edge) -->
+            <div class="flex items-center justify-end gap-6">
+                <!-- Right Navigation -->
+                <nav class="flex items-center gap-1">
+                    @foreach($rightNav as $item)
+                        @if($item->hasChildren())
+                            {{-- Dropdown Menu --}}
+                            <div class="relative" x-data="{ dropOpen: false }" @mouseenter="dropOpen = true" @mouseleave="dropOpen = false">
+                                <a
+                                    href="{{ menu_url($item) ?? '#' }}"
+                                    target="{{ $item->target }}"
+                                    class="nav-link flex items-center gap-1.5 px-4 py-2 text-[15px] font-medium tracking-wide transition-all duration-300 rounded-lg"
+                                    :class="scrolled ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50' : 'text-white hover:bg-white/15'"
+                                >
+                                    {{ $item->title }}
+                                    <svg class="w-4 h-4 transition-transform duration-300" :class="[{ 'rotate-180': dropOpen }, scrolled ? 'text-gray-700' : 'text-white']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </a>
 
-            <!-- Desktop Language Selector -->
-            <div class="relative" x-data="{ langOpen: false }">
+                                {{-- Dropdown Panel --}}
+                                <div
+                                    x-show="dropOpen"
+                                    x-transition:enter="transition ease-out duration-300"
+                                    x-transition:enter-start="opacity-0 translate-y-4"
+                                    x-transition:enter-end="opacity-100 translate-y-0"
+                                    x-transition:leave="transition ease-in duration-200"
+                                    x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 translate-y-4"
+                                    class="absolute left-0 top-full pt-4"
+                                >
+                                    <div class="bg-white rounded-2xl shadow-2xl shadow-black/10 p-4 min-w-[240px] border border-gray-100">
+                                        <div class="space-y-1">
+                                            @foreach($item->children as $child)
+                                                <a
+                                                    href="{{ menu_url($child) }}"
+                                                    target="{{ $child->target }}"
+                                                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-all duration-200"
+                                                >
+                                                    @if($child->icon)
+                                                        <x-dynamic-component :component="$child->icon" class="w-4 h-4" />
+                                                    @else
+                                                        <span class="w-1.5 h-1.5 rounded-full bg-primary-400"></span>
+                                                    @endif
+                                                    {{ $child->title }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            {{-- Simple Link --}}
+                            <a
+                                href="{{ menu_url($item) }}"
+                                target="{{ $item->target }}"
+                                class="nav-link px-4 py-2 text-[15px] font-medium tracking-wide transition-all duration-300 rounded-lg"
+                                :class="scrolled ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50' : 'text-white hover:bg-white/15'"
+                            >
+                                {{ $item->title }}
+                            </a>
+                        @endif
+                    @endforeach
+                </nav>
+
+                <!-- Divider -->
+                <div class="h-8 w-px header-divider transition-colors duration-300" :class="scrolled ? 'bg-gray-200' : 'bg-white/30'"></div>
+
+                <!-- Hotline -->
+                <a href="tel:{{ App\Models\Setting::get('contact_phone', '+84 85 692 9229') }}" class="hotline-link group flex items-center gap-3 transition-all duration-300">
+                    <div class="hotline-icon-wrapper relative">
+                        <div class="absolute inset-0 bg-accent-500/20 rounded-full animate-ping-slow"></div>
+                        <div class="relative w-10 h-10 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center shadow-lg shadow-accent-500/30">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[11px] uppercase tracking-wider hotline-label transition-colors duration-300" :class="scrolled ? 'text-gray-500' : 'text-white/70'">Hotline 24/7</span>
+                        <span class="text-[15px] font-semibold hotline-number group-hover:tracking-wide transition-all duration-300" :class="scrolled ? 'text-primary-600' : 'text-white'">{{ App\Models\Setting::get('contact_phone', '+84 85 692 9229') }}</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Language Selector -->
+                <div class="relative" x-data="{ langOpen: false }">
+                    <button
+                        @click="langOpen = !langOpen"
+                        class="flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 lang-button"
+                        :class="scrolled ? 'hover:bg-gray-100' : 'hover:bg-white/15'"
+                    >
+                        <img src="{{ asset('images/flags/' . app()->getLocale() . '.svg') }}" alt="" class="w-6 h-6 rounded-sm object-cover shadow-sm">
+                        <span class="text-sm font-medium lang-text transition-colors duration-300" :class="scrolled ? 'text-gray-700' : 'text-white'">{{ strtoupper(app()->getLocale()) }}</span>
+                        <svg class="w-4 h-4 transition-all duration-300 lang-chevron" :class="[{ 'rotate-180': langOpen }, scrolled ? 'text-gray-700' : 'text-white']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+
+                    <div
+                        x-show="langOpen"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
+                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 scale-100"
+                        x-transition:leave-end="opacity-0 scale-95"
+                        @click.away="langOpen = false"
+                        class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl shadow-black/10 py-2 z-50 border border-gray-100 overflow-hidden max-h-[400px] overflow-y-auto"
+                    >
+                        @foreach(App\Models\Language::active()->ordered()->get() as $lang)
+                            <a
+                                href="{{ request()->fullUrlWithQuery(['lang' => $lang->code]) }}"
+                                class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-all duration-200 {{ app()->getLocale() === $lang->code ? 'bg-primary-50 text-primary-600 font-medium' : '' }}"
+                            >
+                                <img src="{{ asset('images/flags/' . $lang->code . '.svg') }}" alt="" class="w-5 h-5 rounded-sm object-cover shadow-sm">
+                                <span>{{ $lang->native_name }}</span>
+                                @if(app()->getLocale() === $lang->code)
+                                    <svg class="w-4 h-4 ml-auto text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                @endif
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Search Button -->
                 <button
-                    @click="langOpen = !langOpen"
-                    class="flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 lang-button"
-                    :class="scrolled ? 'hover:bg-gray-100' : 'hover:bg-white/15'"
+                    @click="openSearch()"
+                    class="search-button group relative w-11 h-11 rounded-xl transition-all duration-300 hover:scale-105 flex items-center justify-center"
+                    :class="scrolled ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/15 hover:bg-white/25'"
+                    aria-label="Search"
                 >
-                    <img src="{{ asset('images/flags/' . app()->getLocale() . '.svg') }}" alt="" class="w-6 h-6 rounded-sm object-cover shadow-sm">
-                    <span class="text-sm font-medium lang-text transition-colors duration-300" :class="scrolled ? 'text-gray-700' : 'text-white'">{{ strtoupper(app()->getLocale()) }}</span>
-                    <svg class="w-4 h-4 transition-all duration-300 lang-chevron" :class="[{ 'rotate-180': langOpen }, scrolled ? 'text-gray-700' : 'text-white']" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    <svg class="w-5 h-5 search-icon transition-all duration-300 group-hover:scale-110" :class="scrolled ? 'text-gray-700' : 'text-white'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </button>
-
-                <div
-                    x-show="langOpen"
-                    x-transition:enter="transition ease-out duration-200"
-                    x-transition:enter-start="opacity-0 scale-95 -translate-y-2"
-                    x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-                    x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
-                    @click.away="langOpen = false"
-                    class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl shadow-black/10 py-2 z-50 border border-gray-100 overflow-hidden max-h-[400px] overflow-y-auto"
-                >
-                    @foreach(App\Models\Language::active()->ordered()->get() as $lang)
-                        <a
-                            href="{{ request()->fullUrlWithQuery(['lang' => $lang->code]) }}"
-                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-all duration-200 {{ app()->getLocale() === $lang->code ? 'bg-primary-50 text-primary-600 font-medium' : '' }}"
-                        >
-                            <img src="{{ asset('images/flags/' . $lang->code . '.svg') }}" alt="" class="w-5 h-5 rounded-sm object-cover shadow-sm">
-                            <span>{{ $lang->native_name }}</span>
-                            @if(app()->getLocale() === $lang->code)
-                                <svg class="w-4 h-4 ml-auto text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                </svg>
-                            @endif
-                        </a>
-                    @endforeach
-                </div>
             </div>
-
-            <!-- Search Button -->
-            <button
-                @click="openSearch()"
-                class="search-button group relative w-11 h-11 rounded-xl transition-all duration-300 hover:scale-105 flex items-center justify-center"
-                :class="scrolled ? 'bg-gray-100 hover:bg-gray-200' : 'bg-white/15 hover:bg-white/25'"
-                aria-label="Search"
-            >
-                <svg class="w-5 h-5 search-icon transition-all duration-300 group-hover:scale-110" :class="scrolled ? 'text-gray-700' : 'text-white'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-            </button>
         </div>
     </div>
 

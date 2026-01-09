@@ -49,6 +49,10 @@ class FooterSettings extends Page implements HasForms
                 'en' => 'Victoria General Trading and Tourism Co., Ltd. All Rights Reserved.',
                 'vi' => 'Công ty TNHH Victoria. Bản quyền thuộc về Victoria Tour.',
             ]),
+            'footer_company_name' => Setting::get('footer_company_name', [
+                'en' => 'VICTORIA TOUR COMPANY LIMITED',
+                'vi' => 'CÔNG TY TNHH VICTORIA TOUR',
+            ]),
 
             // Contact Info
             'contact_phone' => Setting::get('contact_phone', ''),
@@ -98,6 +102,19 @@ class FooterSettings extends Page implements HasForms
                                             ->required(),
                                         Forms\Components\TextInput::make('footer_copyright_text.vi')
                                             ->label('Copyright Text (Vietnamese)')
+                                            ->maxLength(255)
+                                            ->required(),
+                                    ])->columns(2),
+
+                                Forms\Components\Section::make('Company Name')
+                                    ->description('Company name displayed in the footer')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('footer_company_name.en')
+                                            ->label('Company Name (English)')
+                                            ->maxLength(255)
+                                            ->required(),
+                                        Forms\Components\TextInput::make('footer_company_name.vi')
+                                            ->label('Company Name (Vietnamese)')
                                             ->maxLength(255)
                                             ->required(),
                                     ])->columns(2),
@@ -195,6 +212,7 @@ class FooterSettings extends Page implements HasForms
         // Branding
         Setting::set('footer_logo', $data['footer_logo'], 'branding');
         Setting::set('footer_copyright_text', $data['footer_copyright_text'], 'footer');
+        Setting::set('footer_company_name', $data['footer_company_name'], 'footer');
 
         // Contact (also updates main Settings page)
         Setting::set('contact_phone', $data['contact_phone'], 'contact');

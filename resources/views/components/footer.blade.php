@@ -34,8 +34,15 @@
                             <span class="text-xl font-sans font-light text-white ml-0.5">Tour</span>
                         @endif
                     </a>
+                    @php
+                        $companyName = \App\Models\Setting::get('footer_company_name', [
+                            'en' => 'VICTORIA TOUR COMPANY LIMITED',
+                            'vi' => 'CÔNG TY TNHH VICTORIA TOUR',
+                        ]);
+                        $companyNameDisplay = is_array($companyName) ? ($companyName[app()->getLocale()] ?? $companyName['en'] ?? '') : $companyName;
+                    @endphp
                     <h2 class="text-base font-medium tracking-wide pt-2">
-                        {{ __('messages.footer.company_name') }}
+                        {{ $companyNameDisplay }}
                     </h2>
                     <div class="space-y-1.5 text-sm text-gray-300 font-light leading-relaxed">
                         <p>{{ \App\Models\Setting::get('contact_address', ['en' => 'No. 29, Pham Van Bach Street'])[app()->getLocale()] ?? '' }}</p>

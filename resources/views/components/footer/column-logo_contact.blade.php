@@ -9,6 +9,11 @@
         'vi' => 'Số 29, Phố Phạm Văn Bạch, Phường Yên Hòa, Quận Cầu Giấy'
     ]);
     $address = is_array($contactAddress) ? ($contactAddress[app()->getLocale()] ?? $contactAddress['en'] ?? '') : $contactAddress;
+    $companyName = App\Models\Setting::get('footer_company_name', [
+        'en' => 'VICTORIA TOUR COMPANY LIMITED',
+        'vi' => 'CÔNG TY TNHH VICTORIA TOUR',
+    ]);
+    $companyNameDisplay = is_array($companyName) ? ($companyName[app()->getLocale()] ?? $companyName['en'] ?? '') : $companyName;
 @endphp
 
 <div class="space-y-4">
@@ -24,7 +29,7 @@
 
     {{-- Company Name --}}
     <h2 class="text-base font-medium tracking-wide pt-2">
-        {{ __('messages.footer.company_name') }}
+        {{ $companyNameDisplay }}
     </h2>
 
     {{-- Contact Details --}}

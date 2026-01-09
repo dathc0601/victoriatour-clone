@@ -151,6 +151,46 @@ img[src*="/flags/"] {
 }
 
 /* ============================================
+   CENTERED LOGO HEADER LAYOUT
+   ============================================ */
+
+/* Desktop header - 3-column grid for centered logo */
+.header-desktop {
+    position: relative;
+    z-index: 1;
+}
+
+/* Logo sizing - handles both square and horizontal logos */
+.header-desktop .logo-link img {
+    max-height: 70px;
+    width: auto;
+    object-fit: contain;
+    transition: max-height 0.3s ease, transform 0.3s ease;
+}
+
+/* Scrolled state - slightly smaller logo for compact header */
+#header.header-scrolled .header-desktop, #header.header-scrolled .header-desktop .container {
+    height: 80px;
+}
+
+#header.header-scrolled .header-desktop .logo-link img {
+    max-height: 50px;
+}
+
+/* Mobile logo sizing */
+#header-mobi .logo-link img {
+    max-height: 56px;
+    width: auto;
+    object-fit: contain;
+    transition: max-height 0.3s ease;
+}
+
+/* Scrolled state for mobile */
+#header.header-scrolled #header-mobi .logo-link img {
+    max-height: 44px;
+}
+
+/* ============================================
    TOURS SLIDER (INSPIRATIONS SECTION)
    ============================================ */
 
@@ -228,13 +268,142 @@ img[src*="/flags/"] {
 }
 
 /* ============================================
+   COMPACT TOUR CARD (Hero Overlay)
+   ============================================ */
+
+.tour-compact-card {
+    height: 200px;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.tour-compact-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 20px 40px -12px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(251, 191, 36, 0.15);
+}
+
+/* Hero Tours Slider Container */
+.hero-tours-slider {
+    overflow: visible;
+}
+
+.hero-tours-slider .swiper-slide {
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* Navigation buttons for hero tours */
+.hero-tours-prev,
+.hero-tours-next {
+    transition: all 0.3s ease;
+}
+
+.hero-tours-prev:hover,
+.hero-tours-next:hover {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-50%) scale(1.05);
+}
+
+.hero-tours-prev.swiper-button-disabled,
+.hero-tours-next.swiper-button-disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Responsive: Mobile */
+@media (max-width: 640px) {
+    .tour-compact-card {
+        height: 180px;
+    }
+
+    .hero-tours-prev,
+    .hero-tours-next {
+        display: none;
+    }
+}
+
+/* ============================================
+   STICKY CONTACT BUTTONS
+   ============================================ */
+
+.sticky-contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.3s ease;
+}
+
+.sticky-contact-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.sticky-contact-btn:active {
+    transform: scale(0.95);
+}
+
+/* Phone - Green gradient */
+.sticky-contact-btn-phone {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.sticky-contact-btn-phone:hover {
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* WhatsApp - Brand green */
+.sticky-contact-btn-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.sticky-contact-btn-whatsapp:hover {
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* Zalo - Brand blue */
+.sticky-contact-btn-zalo {
+    background: linear-gradient(135deg, #0068FF 0%, #0054CC 100%);
+}
+
+.sticky-contact-btn-zalo:hover {
+    box-shadow: 0 6px 20px rgba(0, 104, 255, 0.4);
+}
+
+/* Messenger - Brand blue gradient */
+.sticky-contact-btn-messenger {
+    background: linear-gradient(135deg, #00B2FF 0%, #006AFF 50%, #9B59B6 100%);
+}
+
+.sticky-contact-btn-messenger:hover {
+    box-shadow: 0 6px 20px rgba(0, 106, 255, 0.4);
+}
+
+/* Desktop size */
+@media (min-width: 640px) {
+    .sticky-contact-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+    }
+}
+
+/* ============================================
    DIFFERENTIATORS SECTION (Why Choose Us)
    ============================================ */
 
 .different-section {
     background: #FFF;
     background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(205, 239, 252, 1) 50%, rgba(255, 255, 255, 1) 100%);
-    min-height: 400px;
+    min-height: 280px;
 }
 
 /* Decorative background positioning */

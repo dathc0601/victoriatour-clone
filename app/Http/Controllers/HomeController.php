@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\City;
 use App\Models\Destination;
 use App\Models\Differentiator;
 use App\Models\Slider;
@@ -22,6 +23,16 @@ class HomeController extends Controller
             ->take(6)
             ->get();
 
+        // Get cities ordered by their most recent tour's created_at
+        $featuredCities = City::active()
+            ->whereHas('tours', fn($q) => $q->active())
+            ->with(['destination', 'tours' => fn($q) => $q->active()->latest()->limit(1)])
+            ->withCount(['tours' => fn($q) => $q->active()])
+            ->get()
+            ->sortByDesc(fn($city) => $city->tours->first()?->created_at)
+            ->take(6)
+            ->values();
+
         $featuredTours = Tour::active()
             ->featured()
             ->ordered()
@@ -39,6 +50,7 @@ class HomeController extends Controller
             'sliders',
             'differentiators',
             'featuredDestinations',
+            'featuredCities',
             'featuredTours',
             'latestPosts'
         ));

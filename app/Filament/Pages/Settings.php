@@ -47,6 +47,9 @@ class Settings extends Page implements HasForms
             'contact_phone' => Setting::get('contact_phone', ''),
             'contact_email' => Setting::get('contact_email', ''),
             'contact_address' => Setting::get('contact_address', ['en' => '', 'vi' => '']),
+            'whatsapp_number' => Setting::get('whatsapp_number', ''),
+            'zalo_number' => Setting::get('zalo_number', ''),
+            'messenger_username' => Setting::get('messenger_username', ''),
             // Social
             'facebook_url' => Setting::get('facebook_url', ''),
             'twitter_url' => Setting::get('twitter_url', ''),
@@ -105,6 +108,18 @@ class Settings extends Page implements HasForms
                         Forms\Components\TextInput::make('contact_address.vi')
                             ->label('Address (Vietnamese)')
                             ->required(),
+                        Forms\Components\TextInput::make('whatsapp_number')
+                            ->label('WhatsApp Number')
+                            ->placeholder('+84xxxxxxxxx')
+                            ->helperText('Include country code (e.g., +84 for Vietnam). Used for sticky contact button.'),
+                        Forms\Components\TextInput::make('zalo_number')
+                            ->label('Zalo Number')
+                            ->placeholder('0xxxxxxxxx')
+                            ->helperText('Phone number registered with Zalo. Used for sticky contact button.'),
+                        Forms\Components\TextInput::make('messenger_username')
+                            ->label('Messenger Username')
+                            ->placeholder('your.page.name')
+                            ->helperText('Facebook page username or ID. Used for sticky contact button.'),
                     ])->columns(2),
 
                 // Section 3: Social Media
@@ -218,6 +233,9 @@ class Settings extends Page implements HasForms
         Setting::set('contact_phone', $data['contact_phone'], 'contact');
         Setting::set('contact_email', $data['contact_email'], 'contact');
         Setting::set('contact_address', $data['contact_address'], 'contact');
+        Setting::set('whatsapp_number', $data['whatsapp_number'], 'contact');
+        Setting::set('zalo_number', $data['zalo_number'], 'contact');
+        Setting::set('messenger_username', $data['messenger_username'], 'contact');
 
         // Social
         Setting::set('facebook_url', $data['facebook_url'], 'social');
