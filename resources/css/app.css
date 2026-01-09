@@ -162,7 +162,7 @@ img[src*="/flags/"] {
 
 /* Logo sizing - handles both square and horizontal logos */
 .header-desktop .logo-link img {
-    max-height: 70px;
+    max-height: 135px;
     width: auto;
     object-fit: contain;
     transition: max-height 0.3s ease, transform 0.3s ease;
