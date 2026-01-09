@@ -2,8 +2,8 @@
     @php
         $columns = \App\Models\FooterColumn::getCachedColumns();
         $copyrightText = \App\Models\Setting::get('footer_copyright_text', [
-            'en' => 'Victoria General Trading and Tourism Co., Ltd. All Rights Reserved.',
-            'vi' => 'Công ty TNHH Victoria. Bản quyền thuộc về Victoria Tour.',
+            'en' => 'TheSingTour General Trading and Tourism Co., Ltd. All Rights Reserved.',
+            'vi' => 'Công ty TNHH TheSingTour. Bản quyền thuộc về TheSingTour.',
         ]);
         $copyright = is_array($copyrightText) ? ($copyrightText[app()->getLocale()] ?? $copyrightText['en'] ?? '') : $copyrightText;
     @endphp
@@ -36,8 +36,8 @@
                     </a>
                     @php
                         $companyName = \App\Models\Setting::get('footer_company_name', [
-                            'en' => 'VICTORIA TOUR COMPANY LIMITED',
-                            'vi' => 'CÔNG TY TNHH VICTORIA TOUR',
+                            'en' => 'TheSingTour COMPANY LIMITED',
+                            'vi' => 'CÔNG TY TNHH TheSingTour',
                         ]);
                         $companyNameDisplay = is_array($companyName) ? ($companyName[app()->getLocale()] ?? $companyName['en'] ?? '') : $companyName;
                     @endphp

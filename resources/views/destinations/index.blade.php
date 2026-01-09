@@ -47,7 +47,6 @@
                 <!-- Bird Icon -->
                 <div class="mb-6">
                     <img src="{{ asset('images/logo-icon.svg') }}"
-                         alt="Victoria Tour"
                          class="w-10 h-10 md:w-12 md:h-12 mx-auto">
                 </div>
                 <!-- Section Title -->
