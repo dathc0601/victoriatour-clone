@@ -47,11 +47,11 @@ return [
     // Destination Show Page
     'destination' => [
         'cities_title' => 'Destination in :name',
-        'cities_subtitle' => 'Vietnam Tour Packages with TheSingTour',
+        'cities_subtitle' => 'Vietnam Tour Packages with TheSinhTour',
         'tours_title' => ':name Tours',
-        'tours_subtitle' => 'Vietnam Tour Packages with TheSingTour',
+        'tours_subtitle' => 'Vietnam Tour Packages with TheSinhTour',
         'hotels_title' => ':name Featured Hotels',
-        'hotels_subtitle' => 'Vietnam Tour Packages with TheSingTour',
+        'hotels_subtitle' => 'Vietnam Tour Packages with TheSinhTour',
         'view_all_destinations' => 'View All Destination',
         'view_all_tours' => 'View All :name Tours',
         'discover_more' => 'Discover more',
@@ -69,9 +69,9 @@ return [
     // Blog Page
     'blog' => [
         'page_title' => 'Travel Blog',
-        'meta_description' => 'Travel tips, guides, and inspiration from TheSingTour. Discover the best of Southeast Asia.',
+        'meta_description' => 'Travel tips, guides, and inspiration from TheSinhTour. Discover the best of Southeast Asia.',
         'hero_title' => "WHAT'S NEW?",
-        'hero_subtitle' => 'Things change fast in the travel world. With new products constantly emerging and news from across the region mushrooming almost daily, it is hard to keep up. Fortunately, TheSingTour stays abreast of the latest developments to keep its finger on the ever-shifting pulse.',
+        'hero_subtitle' => 'Things change fast in the travel world. With new products constantly emerging and news from across the region mushrooming almost daily, it is hard to keep up. Fortunately, TheSinhTour stays abreast of the latest developments to keep its finger on the ever-shifting pulse.',
         'all_news' => 'All News',
         'latest_news' => 'LATEST NEWS',
         'read_more' => 'Read More',
@@ -104,7 +104,7 @@ return [
 
     // Footer
     'footer' => [
-        'company_name' => 'TheSingTour COMPANY LIMITED',
+        'company_name' => 'TheSinhTour COMPANY LIMITED',
         'phone_label' => 'Phone number',
         'email_label' => 'Email',
         'destinations' => 'Destinations',
@@ -133,9 +133,9 @@ return [
         'discover_more' => 'Discover more',
 
         // About Section
-        'about_badge' => 'About TheSingTour',
+        'about_badge' => 'About TheSinhTour',
         'about_title' => 'Your Trusted Travel Partner Since 2010',
-        'about_p1' => 'TheSingTour has been creating unforgettable travel experiences across Southeast Asia for over a decade. We specialize in tailor-made journeys that combine cultural immersion, natural beauty, and local authenticity.',
+        'about_p1' => 'TheSinhTour has been creating unforgettable travel experiences across Southeast Asia for over a decade. We specialize in tailor-made journeys that combine cultural immersion, natural beauty, and local authenticity.',
         'about_p2' => 'Our team of experienced travel consultants works tirelessly to ensure every trip exceeds your expectations. From luxury escapes to adventure tours, we cater to all types of travelers.',
         'learn_more_about_us' => 'Learn More About Us',
         'years_experience' => 'Years Experience',
@@ -157,7 +157,7 @@ return [
     'tours' => [
         'page_title' => 'Tours',
         'page_title_destination' => ':name Tours',
-        'meta_description' => 'Explore our curated collection of tours across Southeast Asia. Find your perfect adventure with TheSingTour.',
+        'meta_description' => 'Explore our curated collection of tours across Southeast Asia. Find your perfect adventure with TheSinhTour.',
         'hero_title' => 'Explore Our Tours',
         'hero_title_destination' => ':name Tours',
         'hero_subtitle' => 'Discover handcrafted journeys designed to give you extraordinary travel experiences across Southeast Asia.',
@@ -199,7 +199,7 @@ return [
     'contact_page' => [
         // Meta
         'page_title' => 'Contact Us',
-        'meta_description' => 'Get in touch with TheSingTour. We\'re here to help you plan your perfect Southeast Asia adventure.',
+        'meta_description' => 'Get in touch with TheSinhTour. We\'re here to help you plan your perfect Southeast Asia adventure.',
 
         // Hero Section
         'hero_title' => 'Get In Touch',
@@ -241,7 +241,7 @@ return [
         'view_tour_details' => 'View Tour Details',
 
         // Map Section
-        'our_location' => 'TheSingTour Office',
+        'our_location' => 'TheSinhTour Office',
         'get_directions' => 'Get Directions',
     ],
 
@@ -263,7 +263,7 @@ return [
     'mice' => [
         // Meta
         'page_title' => 'Meetings & Incentives',
-        'meta_description' => 'Professional MICE services across Southeast Asia. Conference venues, incentive travel, and corporate events by TheSingTour.',
+        'meta_description' => 'Professional MICE services across Southeast Asia. Conference venues, incentive travel, and corporate events by TheSinhTour.',
 
         // Hero Section
         'badge' => 'Corporate Excellence',
@@ -275,7 +275,7 @@ return [
 
         // Intro Section
         'intro_title' => 'Mice',
-        'intro_desc_1' => 'TheSingTour experience in designing exceptional experiences continues to cast an intimate spell. The almost mesmerizing bonds we have with our East and South East Asian destinations are amongst the closest one can find – be it a dreamy hideaway along sandy shores or a breathtaking moment overlooking its authentic vastness.',
+        'intro_desc_1' => 'TheSinhTour experience in designing exceptional experiences continues to cast an intimate spell. The almost mesmerizing bonds we have with our East and South East Asian destinations are amongst the closest one can find – be it a dreamy hideaway along sandy shores or a breathtaking moment overlooking its authentic vastness.',
         'intro_desc_2' => 'It is all in delivering that perfect moment, where a second of tasting our Asia delivers a moment of eternal gratitude for all it encompasses. It is all about the local expertise, executed with passion and perfection for an exceeding expectations\' experience.',
 
         // Filter Section

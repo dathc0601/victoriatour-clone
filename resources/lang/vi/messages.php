@@ -47,11 +47,11 @@ return [
     // Destination Show Page
     'destination' => [
         'cities_title' => 'Điểm đến tại :name',
-        'cities_subtitle' => 'Gói tour Việt Nam với TheSingTour',
+        'cities_subtitle' => 'Gói tour Việt Nam với TheSinhTour',
         'tours_title' => 'Tour :name',
-        'tours_subtitle' => 'Gói tour Việt Nam với TheSingTour',
+        'tours_subtitle' => 'Gói tour Việt Nam với TheSinhTour',
         'hotels_title' => 'Khách sạn nổi bật tại :name',
-        'hotels_subtitle' => 'Gói tour Việt Nam với TheSingTour',
+        'hotels_subtitle' => 'Gói tour Việt Nam với TheSinhTour',
         'view_all_destinations' => 'Xem tất cả điểm đến',
         'view_all_tours' => 'Xem tất cả tour :name',
         'discover_more' => 'Khám phá thêm',
@@ -69,9 +69,9 @@ return [
     // Blog Page
     'blog' => [
         'page_title' => 'Blog Du Lịch',
-        'meta_description' => 'Mẹo du lịch, hướng dẫn và cảm hứng từ TheSingTour. Khám phá những điều tuyệt vời nhất của Đông Nam Á.',
+        'meta_description' => 'Mẹo du lịch, hướng dẫn và cảm hứng từ TheSinhTour. Khám phá những điều tuyệt vời nhất của Đông Nam Á.',
         'hero_title' => 'CÓ GÌ MỚI?',
-        'hero_subtitle' => 'Mọi thứ thay đổi nhanh chóng trong thế giới du lịch. Với các sản phẩm mới liên tục xuất hiện và tin tức từ khắp nơi trong khu vực gần như hàng ngày, thật khó để theo kịp. May mắn thay, TheSingTour luôn cập nhật những phát triển mới nhất để nắm bắt nhịp đập không ngừng thay đổi.',
+        'hero_subtitle' => 'Mọi thứ thay đổi nhanh chóng trong thế giới du lịch. Với các sản phẩm mới liên tục xuất hiện và tin tức từ khắp nơi trong khu vực gần như hàng ngày, thật khó để theo kịp. May mắn thay, TheSinhTour luôn cập nhật những phát triển mới nhất để nắm bắt nhịp đập không ngừng thay đổi.',
         'all_news' => 'Tất cả tin tức',
         'latest_news' => 'TIN MỚI NHẤT',
         'read_more' => 'Đọc thêm',
@@ -104,7 +104,7 @@ return [
 
     // Footer
     'footer' => [
-        'company_name' => 'CÔNG TY TNHH TheSingTour',
+        'company_name' => 'CÔNG TY TNHH TheSinhTour',
         'phone_label' => 'Số điện thoại',
         'email_label' => 'Email',
         'destinations' => 'Điểm đến',
@@ -133,9 +133,9 @@ return [
         'discover_more' => 'Khám phá thêm',
 
         // About Section
-        'about_badge' => 'Về TheSingTour',
+        'about_badge' => 'Về TheSinhTour',
         'about_title' => 'Đối tác du lịch đáng tin cậy từ năm 2010',
-        'about_p1' => 'TheSingTour đã tạo nên những trải nghiệm du lịch khó quên khắp Đông Nam Á trong hơn một thập kỷ. Chúng tôi chuyên về các hành trình được thiết kế riêng, kết hợp giữa trải nghiệm văn hóa, vẻ đẹp thiên nhiên và bản sắc địa phương.',
+        'about_p1' => 'TheSinhTour đã tạo nên những trải nghiệm du lịch khó quên khắp Đông Nam Á trong hơn một thập kỷ. Chúng tôi chuyên về các hành trình được thiết kế riêng, kết hợp giữa trải nghiệm văn hóa, vẻ đẹp thiên nhiên và bản sắc địa phương.',
         'about_p2' => 'Đội ngũ tư vấn viên du lịch giàu kinh nghiệm của chúng tôi luôn nỗ lực để đảm bảo mỗi chuyến đi đều vượt quá mong đợi của bạn. Từ kỳ nghỉ sang trọng đến tour phiêu lưu, chúng tôi phục vụ mọi loại du khách.',
         'learn_more_about_us' => 'Tìm hiểu thêm về chúng tôi',
         'years_experience' => 'Năm kinh nghiệm',
@@ -157,7 +157,7 @@ return [
     'tours' => [
         'page_title' => 'Tour Du Lịch',
         'page_title_destination' => 'Tour :name',
-        'meta_description' => 'Khám phá bộ sưu tập tour được chọn lọc khắp Đông Nam Á. Tìm chuyến phiêu lưu hoàn hảo của bạn với TheSingTour.',
+        'meta_description' => 'Khám phá bộ sưu tập tour được chọn lọc khắp Đông Nam Á. Tìm chuyến phiêu lưu hoàn hảo của bạn với TheSinhTour.',
         'hero_title' => 'Khám Phá Tour Của Chúng Tôi',
         'hero_title_destination' => 'Tour :name',
         'hero_subtitle' => 'Khám phá những hành trình được thiết kế thủ công để mang đến cho bạn những trải nghiệm du lịch phi thường khắp Đông Nam Á.',
@@ -199,7 +199,7 @@ return [
     'contact_page' => [
         // Meta
         'page_title' => 'Liên Hệ',
-        'meta_description' => 'Liên hệ với TheSingTour. Chúng tôi sẵn sàng giúp bạn lên kế hoạch cho hành trình hoàn hảo tại Đông Nam Á.',
+        'meta_description' => 'Liên hệ với TheSinhTour. Chúng tôi sẵn sàng giúp bạn lên kế hoạch cho hành trình hoàn hảo tại Đông Nam Á.',
 
         // Hero Section
         'hero_title' => 'Liên Hệ Với Chúng Tôi',
@@ -241,7 +241,7 @@ return [
         'view_tour_details' => 'Xem Chi Tiết Tour',
 
         // Map Section
-        'our_location' => 'Văn Phòng TheSingTour',
+        'our_location' => 'Văn Phòng TheSinhTour',
         'get_directions' => 'Chỉ Đường',
     ],
 
@@ -263,7 +263,7 @@ return [
     'mice' => [
         // Meta
         'page_title' => 'Hội Nghị & Sự Kiện',
-        'meta_description' => 'Dịch vụ MICE chuyên nghiệp tại Đông Nam Á. Địa điểm hội nghị, du lịch khuyến thưởng và sự kiện doanh nghiệp bởi TheSingTour.',
+        'meta_description' => 'Dịch vụ MICE chuyên nghiệp tại Đông Nam Á. Địa điểm hội nghị, du lịch khuyến thưởng và sự kiện doanh nghiệp bởi TheSinhTour.',
 
         // Hero Section
         'badge' => 'Dịch Vụ Doanh Nghiệp',
@@ -275,7 +275,7 @@ return [
 
         // Intro Section
         'intro_title' => 'Mice',
-        'intro_desc_1' => 'Kinh nghiệm của TheSingTour trong việc thiết kế những trải nghiệm đặc biệt tiếp tục tạo nên sức hút mê hoặc. Mối liên kết gần gũi mà chúng tôi có với các điểm đến Đông và Đông Nam Á là gần như không thể tìm thấy ở nơi khác – dù là nơi nghỉ dưỡng mơ mộng bên bờ cát hay khoảnh khắc ngoạn mục nhìn ra sự bao la chân thực.',
+        'intro_desc_1' => 'Kinh nghiệm của TheSinhTour trong việc thiết kế những trải nghiệm đặc biệt tiếp tục tạo nên sức hút mê hoặc. Mối liên kết gần gũi mà chúng tôi có với các điểm đến Đông và Đông Nam Á là gần như không thể tìm thấy ở nơi khác – dù là nơi nghỉ dưỡng mơ mộng bên bờ cát hay khoảnh khắc ngoạn mục nhìn ra sự bao la chân thực.',
         'intro_desc_2' => 'Tất cả nằm ở việc mang đến khoảnh khắc hoàn hảo, nơi một giây thưởng thức châu Á của chúng tôi mang lại sự biết ơn vĩnh cửu. Đó là chuyên môn địa phương, được thực hiện với niềm đam mê và sự hoàn hảo để vượt qua mọi kỳ vọng.',
 
         // Filter Section
