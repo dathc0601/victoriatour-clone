@@ -133,9 +133,9 @@
                         </svg>
                     </div>
                     <h3 class="font-heading font-semibold text-gray-900 text-lg mb-2">{{ __('messages.contact_page.phone_label') }}</h3>
-                    <a href="tel:{{ App\Models\Setting::get('phone', '+84 85 692 9229') }}"
+                    <a href="tel:{{ App\Models\Setting::get('contact_phone', '+84 85 692 9229') }}"
                        class="text-gray-600 text-sm hover:text-accent-500 transition-colors duration-300">
-                        {{ App\Models\Setting::get('phone', '+84 85 692 9229') }}
+                        {{ App\Models\Setting::get('contact_phone', '+84 85 692 9229') }}
                     </a>
                 </div>
 

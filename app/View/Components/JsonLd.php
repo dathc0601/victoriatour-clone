@@ -37,7 +37,7 @@ class JsonLd extends Component
             'name' => config('app.name', 'Victoria Tour'),
             'url' => config('app.url'),
             'logo' => asset('images/logo.png'),
-            'description' => 'Victoria Tour - Your trusted travel partner for extraordinary journeys across Southeast Asia.',
+            'description' => \App\Models\Setting::get('meta_description.en'),
             'address' => [
                 '@type' => 'PostalAddress',
                 'streetAddress' => \App\Models\Setting::get('address', '123 Travel Street'),
@@ -46,7 +46,7 @@ class JsonLd extends Component
             ],
             'contactPoint' => [
                 '@type' => 'ContactPoint',
-                'telephone' => \App\Models\Setting::get('phone', '+84 85 692 9229'),
+                'telephone' => \App\Models\Setting::get('contact_phone', '+84 85 692 9229'),
                 'email' => \App\Models\Setting::get('email', 'info@victoriatour.com'),
                 'contactType' => 'customer service',
             ],
