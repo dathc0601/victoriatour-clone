@@ -419,6 +419,44 @@
                 }
             });
         }
+
+        // Initialize attachment lightbox for overview section
+        (function initAttachmentLightbox() {
+            const overviewSection = document.querySelector('#section-overview');
+            if (!overviewSection) return;
+
+            const attachments = overviewSection.querySelectorAll('.attachment a');
+            if (attachments.length === 0) return;
+
+            attachments.forEach((link, index) => {
+                // Add GLightbox class and data attributes
+                link.classList.add('attachment-lightbox');
+                link.setAttribute('data-gallery', 'overview-attachments');
+
+                // Extract filename for title or use generic
+                const caption = link.querySelector('.attachment__name');
+                const title = caption ? caption.textContent : `Image ${index + 1}`;
+                link.setAttribute('data-title', title);
+
+                // Prevent default navigation
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+
+            // Initialize GLightbox for attachments
+            GLightbox({
+                selector: '.attachment-lightbox',
+                touchNavigation: true,
+                loop: true,
+                openEffect: 'zoom',
+                closeEffect: 'fade',
+                cssEfects: {
+                    fade: { in: 'fadeIn', out: 'fadeOut' },
+                    zoom: { in: 'zoomIn', out: 'zoomOut' }
+                }
+            });
+        })();
     });
 </script>
 @endpush
