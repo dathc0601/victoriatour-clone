@@ -2,7 +2,7 @@
 
 @if($variant === 'featured')
     {{-- Featured Card: Blurred Background with Text Content --}}
-    <a href="{{ route('tours.index', ['city' => $city->slug]) }}"
+    <a href="{{ route('destinations.city', ['destination' => $city->destination->slug, 'city' => $city->slug]) }}"
        class="destination-card group block h-full"
        data-aos="fade-up"
        data-aos-delay="{{ $position * 50 }}">
@@ -60,7 +60,7 @@
 
 @else
     {{-- Standard/Tall/Large Card: Image with Name Overlay at bottom --}}
-    <a href="{{ route('tours.index', ['city' => $city->slug]) }}"
+    <a href="{{ route('destinations.city', ['destination' => $city->destination->slug, 'city' => $city->slug]) }}"
        class="destination-card group block h-full"
        data-aos="fade-up"
        data-aos-delay="{{ $position * 50 }}">

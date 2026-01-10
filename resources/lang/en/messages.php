@@ -60,6 +60,21 @@ return [
         'destination' => 'Destination',
     ],
 
+    // City Show Page
+    'city' => [
+        'meta_description' => 'Explore tours in :city, :destination. Discover the best travel experiences with TheSinhTour.',
+        'tours_title' => 'Tours in :city',
+        'tours_subtitle' => 'Discover amazing travel experiences in :city, :destination',
+        'no_tours_title' => 'No Tours Available',
+        'no_tours_message' => 'There are currently no tours available in :city. Please check back later or explore other destinations.',
+        'back_to_destination' => 'Back to :destination',
+        'explore_more' => 'Want to explore more places in :destination?',
+        'view_all_in_destination' => 'View All Cities in :destination',
+    ],
+
+    // Common
+    'tour' => 'Tour',
+
     // Blog
     'latest_posts' => 'Latest Posts',
     'popular_posts' => 'Popular Posts',

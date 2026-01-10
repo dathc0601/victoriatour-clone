@@ -28,7 +28,8 @@ Route::get('/tours/{slug}', [TourController::class, 'show'])->name('tours.show')
 
 // Destinations
 Route::get('/destinations', [DestinationController::class, 'index'])->name('destinations.index');
-Route::get('/destinations/{slug}', [DestinationController::class, 'show'])->name('destinations.show');
+Route::get('/destinations/{destination}', [DestinationController::class, 'show'])->name('destinations.show');
+Route::get('/destinations/{destination}/{city}', [DestinationController::class, 'showCity'])->name('destinations.city');
 
 // Blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');

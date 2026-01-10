@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Destination;
 
 class DestinationController extends Controller
@@ -18,9 +19,9 @@ class DestinationController extends Controller
         return view('destinations.index', compact('destinations'));
     }
 
-    public function show(string $slug)
+    public function show(string $destination)
     {
-        $destination = Destination::where('slug', $slug)
+        $destination = Destination::where('slug', $destination)
             ->active()
             ->with([
                 'cities' => fn($q) => $q->where('is_active', true)->withCount(['tours' => fn($tq) => $tq->active()]),
@@ -43,5 +44,26 @@ class DestinationController extends Controller
             ->get();
 
         return view('destinations.show', compact('destination', 'tours', 'hotels'));
+    }
+
+    public function showCity(string $destination, string $city)
+    {
+        $destination = Destination::where('slug', $destination)
+            ->active()
+            ->firstOrFail();
+
+        $city = City::where('slug', $city)
+            ->where('destination_id', $destination->id)
+            ->active()
+            ->with('destination')
+            ->firstOrFail();
+
+        $tours = $city->tours()
+            ->active()
+            ->ordered()
+            ->with('categories')
+            ->paginate(12);
+
+        return view('destinations.city', compact('destination', 'city', 'tours'));
     }
 }

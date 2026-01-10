@@ -1,6 +1,6 @@
 @props(['city', 'destination'])
 
-<a href="{{ route('tours.destination', $destination->slug) }}"
+<a href="{{ route('destinations.city', ['destination' => $destination->slug, 'city' => $city->slug]) }}"
    class="city-card block relative rounded-2xl overflow-hidden group"
    data-aos="fade-up">
 

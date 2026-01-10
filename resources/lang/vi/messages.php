@@ -60,6 +60,21 @@ return [
         'destination' => 'Điểm đến',
     ],
 
+    // City Show Page
+    'city' => [
+        'meta_description' => 'Khám phá các tour tại :city, :destination. Trải nghiệm du lịch tuyệt vời cùng TheSinhTour.',
+        'tours_title' => 'Tour tại :city',
+        'tours_subtitle' => 'Khám phá những trải nghiệm du lịch tuyệt vời tại :city, :destination',
+        'no_tours_title' => 'Chưa có tour',
+        'no_tours_message' => 'Hiện chưa có tour nào tại :city. Vui lòng quay lại sau hoặc khám phá các điểm đến khác.',
+        'back_to_destination' => 'Quay lại :destination',
+        'explore_more' => 'Bạn muốn khám phá thêm các địa điểm tại :destination?',
+        'view_all_in_destination' => 'Xem tất cả thành phố tại :destination',
+    ],
+
+    // Common
+    'tour' => 'Tour',
+
     // Blog
     'latest_posts' => 'Bài viết mới nhất',
     'popular_posts' => 'Bài viết phổ biến',
