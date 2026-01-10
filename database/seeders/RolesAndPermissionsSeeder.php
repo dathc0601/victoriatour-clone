@@ -73,7 +73,7 @@ class RolesAndPermissionsSeeder extends Seeder
             // Menu Items
             'view_menu::item', 'view_any_menu::item', 'create_menu::item', 'update_menu::item', 'delete_menu::item', 'delete_any_menu::item',
             // Page permissions
-            'page_Settings', 'page_FooterSettings',
+            'page_Settings', 'page_FooterSettings', 'page_SeoSettings',
             // Widget permissions
             'widget_StatsOverviewWidget',
         ];

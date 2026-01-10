@@ -10,10 +10,12 @@ use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\MiceController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
 
-// Sitemap
+// Sitemap & SEO
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
 
 // Homepage
 Route::get('/', [HomeController::class, 'index'])->name('home');
